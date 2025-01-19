@@ -19,8 +19,17 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'apm',
+        'app',
         'email',
         'password',
+        'carrera',
+        'matricula',
+        'nss',
+        'fecha_nac',
+        'sexo',
+        'genero',
+        'rol_id'
     ];
 
     /**
@@ -42,4 +51,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    
+public function Roles() {
+    return $this->belongsTo(Roles::class,'rol_id');
+}
+
+public function Publicaciones() {
+    return $this->hasOne(Publicaciones::class,'user_id','id');
+}
+
+public function AlumnoTaller() {
+    return $this->hasOne(AlumnoTaller::class,'user_id','id');
+
+}
+
+public function DocenteTaller() {
+    return $this->hasOne(DocenteTaller::class,'user_id','id');
+
+}
 }
