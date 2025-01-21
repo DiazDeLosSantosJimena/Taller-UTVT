@@ -1,0 +1,11 @@
+.container-title {
+    display: flex;
+    justify-content: center; /* Alinea horizontalmente */
+    align-items: center; /* Alinea verticalmente */
+    height: 100px; /* Altura ajustable según tus necesidades */
+    border: 1px solid #ccc; /* Para visualizar el contenedor */
+}
+
+.align-content-md-center {
+    text-align: center;
+}
