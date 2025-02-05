@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alumno_tallers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('taller_id')->constrained('talleres');
-            $table->boolean('constancia');
-            $table->varchar('estatus');
+        Schema::create('periodos', function (Blueprint $table) {
+            $table->id();
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alumnotaller');
+        Schema::dropIfExists('periodo');
     }
 };

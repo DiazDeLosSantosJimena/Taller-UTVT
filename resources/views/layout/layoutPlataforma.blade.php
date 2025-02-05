@@ -8,6 +8,7 @@
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="{{ asset('css/plataforma/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="{{ asset('css/plataforma/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection" />
     @yield('css')
@@ -15,14 +16,28 @@
 
 <body>
     <nav class="green darken-3" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-utvt" href="/" class="brand-logo">UTVT</a>
+        <div class="nav-wrapper container"><a id="logo-utvt" href="/" class="brand-logo"><img height="60" src="{{ asset('img/cuervo.svg') }}" alt="UTVT"></a>
             <!-- Navbar PC -->
             <ul class="right hide-on-med-and-down">
+                @auth
+                <li><a href="#">Avisos</a></li>
+                <li><a href="/talleres-docente">Talleres</a></li>
+                <li><a href="/logout">Cerrar Sesión</a></li>
+                @endauth
+                @guest
                 <li><a href="/login">Iniciar Sesión</a></li>
+                @endguest
             </ul>
             <!-- Navbar mobile -->
             <ul id="nav-mobile" class="sidenav">
+                @auth
+                <li><a href="#">Avisos</a></li>
+                <li><a href="#">Talleres</a></li>
+                <li><a href="/logout">Cerrar Sesión</a></li>
+                @endauth
+                @guest
                 <li><a href="/login">Iniciar Sesión</a></li>
+                @endguest
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>

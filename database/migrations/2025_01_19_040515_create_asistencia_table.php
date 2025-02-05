@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('asistencia', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('alumtalle_id')->constrained('alumnotaller');
+            $table->foreignId('alumtalle_id')->constrained('alumno_tallers');
+            $table->foreignId('periodo_id')->constrained('periodos');
             $table->date('fecha');
             $table->timestamps();
         });

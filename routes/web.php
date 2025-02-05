@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +19,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        switch (Auth::user()->rol_id) {
+            case 1:
+                return redirect('admin');
+                break;
+            case 2:
+                return redirect('/inicio');
+                break;
+            case 3:
+                return redirect('/inicio');
+                break;
+            default:
+                return redirect('/login');
+                break;
+        }
+    }
+    return redirect('/inicio');
 });
 
     //  Login
@@ -24,4 +43,12 @@ Route::get('/login', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/home', [UsersController::class, 'index']);
+//  Docentes
+Route::get('/talleres-docente',[DocenteController::class, 'index']);
+Route::name('alumnos-taller')->get('alumnos-taller/{id}', [DocenteController::class, 'alumnos_taller']);
+Route::name('asistencia')->get('asistencia/{id}', [DocenteController::class, 'asistenciaView']);
+Route::post('asistencia/register', [DocenteController::class, 'asistenciaRegister'])->name('asistenciaRegister');
+
+Route::get('/inicio', [UsersController::class, 'index']);
+Route::name('admin')->get('/admin', [Controller::class, 'index']);
+Route::name('agregar_periodo')->post('nuevoPeriodo', [Controller::class, 'newPeriodo']);
