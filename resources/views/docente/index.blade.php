@@ -53,38 +53,39 @@ $session_taller = session('taller')
         </div>
         @endforeach
     </div>
-    <div class="col s12 m12 row center">
-        <div class="col s12 m12">
-            <h3>Periodos anteriores</h3>
-            <span>Talleres de periodos anteriores.</span>
-        </div>
-        <div class="col sm12 m12 pt-3">
-            <table class="table-responsive centered">
-                <thead>
-                    <tr>
-                        <th>Taller</th>
-                        <th>Periodo</th>
-                        <th>Constancia</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Voleibol</td>
-                        <td>Enero - Abril</td>
-                        <td><a class="waves-effect waves-light btn green">Obtener</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 @endif
 
 @else
 <div class="row">
-    <h3>@if(auth()->user->rol_id === 2) No tiene ningun taller asignado, comuniquese con sistemas. @elseif(auth()->user->rol_id === 3) No estás inscrito a ningun taller. Dirigete a: <a href="{{ route('/inicio') }}">Inicio</a> para conocer los talleres e inscribirte a uno. @endif</h3>
+    <h3 class="center">@if(auth()->user()->rol_id === 2) No tiene ningun taller asignado, comuniquese con sistemas. @elseif(auth()->user()->rol_id === 3) No estás inscrito a ningun taller. Dirigete a: <a href="/inicio#talleres">Inicio</a> para conocer los talleres e inscribirte a uno. @endif</h3>
 </div>
 @endif
+
+<div class="col s12 m12 row center">
+    <div class="col s12 m12">
+        <h3>Periodos anteriores</h3>
+        <span>Talleres de periodos anteriores.</span>
+    </div>
+    <div class="col sm12 m12 pt-3">
+        <table class="table-responsive centered">
+            <thead>
+                <tr>
+                    <th>Taller</th>
+                    <th>Periodo</th>
+                    <th>Constancia</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Voleibol</td>
+                    <td>Enero - Abril 2024</td>
+                    <td><a class="waves-effect waves-light btn green">Obtener</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @endsection

@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="talleres">
         <div class="col s12 m12 center">
             <h4>Nuestros Talleres</h4>
             <p>La Universidad Tecnológica del Valle de Toluca ofrece talleres deportivos y culturales para la comunidad universitaria.</p>

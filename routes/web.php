@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\EventosPublicacionesController;
+use App\Http\Controllers\TalleresController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,3 +54,8 @@ Route::post('asistencia/register', [DocenteController::class, 'asistenciaRegiste
 Route::get('/inicio', [UsersController::class, 'index']);
 Route::name('admin')->get('/admin', [Controller::class, 'index']);
 Route::name('agregar_periodo')->post('nuevoPeriodo', [Controller::class, 'newPeriodo']);
+
+Route::resource('/users', UsersController::class);
+Route::name('users.show')->get('/users/show', [UsersController::class, 'show']);
+Route::resource('/publicaciones', EventosPublicacionesController::class);
+Route::resource('/taller', TalleresController::class);

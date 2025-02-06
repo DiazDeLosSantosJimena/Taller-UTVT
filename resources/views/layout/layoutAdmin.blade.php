@@ -20,12 +20,11 @@
                     <img src="{{ asset('img/cuervo.svg') }}" class="rounded mx-auto d-block" alt="UTVT">
                 </div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Inicio</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Inicio</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" data-bs-toggle="collapse" href="#collapseRegistros" role="button" aria-expanded="false" aria-controls="collapseExample">Registros <i class="bi bi-arrow-down-short"></i></a>
                     <div class="collapse" id="collapseRegistros">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">  - Docentes</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">  - Alumnos</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">  - Talleres</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('users.show') }}">  - Usuarios</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="taller">  - Talleres</a>
                 </div>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Publicaciones</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Eventos</a>
@@ -59,8 +58,12 @@
             </div>
         </div>
         <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+         <script src="{{ asset('js/admin/bootstrap.bundle.min.js') }}"></script>
         <!-- Core theme JS-->
         <script src="{{ asset('js/admin/scripts.js') }}"></script>
+        <!-- JQuery -->
+        <script src="{{ asset('js/admin/jquery-3.6.4.min.js') }}"></script>
+        @yield('js')
     </body>
+    @yield('modals')
 </html>
