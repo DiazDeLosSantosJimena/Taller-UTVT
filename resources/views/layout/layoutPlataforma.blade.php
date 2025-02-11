@@ -90,7 +90,7 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="{{ asset('js/plataforma/materialize.js') }}"></script>
     <script src="{{ asset('js/plataforma/init.js') }}"></script>
-
+    @yield('js')
 </body>
 
 </html>

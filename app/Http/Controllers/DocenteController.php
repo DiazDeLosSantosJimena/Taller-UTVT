@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AlumnoTaller;
 use App\Models\Asistencia;
+use App\Models\AsistenciaPorcentaje;
 use App\Models\DocenteTaller;
 use App\Models\Periodo;
 use App\Models\Talleres;
@@ -11,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DocenteController extends Controller
 {
@@ -35,19 +37,20 @@ class DocenteController extends Controller
 
     public function alumnos_taller($id)
     {
-        //  Porcentaje de asistencia de los alumnos que pertenencen a un taller
+        //  Periodo actual en el sistema
         $periodo = Periodo::latest()->first();
-        $fecha_inicio = Carbon::parse($periodo->fecha_inicio);
-        $fecha_fin = Carbon::parse($periodo->fecha_fin);
-
-        $totalDias = $fecha_inicio->diffInDays($fecha_fin) + 1; // +1 para incluir el día inicial
+        $fecha_inicio = $periodo->fecha_inicio;
+        $fecha_fin = $periodo->fecha_fin;
 
         // Total de asistencias
-        $asistencias = Asistencia::join('alumno_tallers', 'alumno_tallers.id', 'asistencia.alumtalle_id')
-            ->join('periodos', 'periodos.id', 'asistencia.periodo_id')
-            ->whereBetween('fecha', [$fecha_inicio, $fecha_fin]);
+        // Filtrar por taller_id si se proporciona
+        $porcentajes = DB::table('asistencia_porcentaje')
+        ->join('alumno_tallers', 'asistencia_porcentaje.user_id', '=', 'alumno_tallers.user_id')
+        ->where('alumno_tallers.taller_id', $id)
+        ->select('asistencia_porcentaje.*')
+        ->get();
 
-        // dd($asistencias);
+        // dd($porcentajes);
 
         $taller = Talleres::find($id);
         $alumnos = User::select('users.id', 'name', 'app', 'apm', 'email', 'carrera', 'matricula', 'genero')
@@ -56,7 +59,11 @@ class DocenteController extends Controller
             ->where('talleres.id', '=', $id)
             ->get();
 
-        return view('docente.alumnos', compact('alumnos', 'taller'));
+        return view('docente.alumnos',[
+            'alumnos' => $alumnos,
+            'taller' => $taller,
+            'porcentajes' => $porcentajes
+        ]);
     }
 
     public function asistenciaView($id)

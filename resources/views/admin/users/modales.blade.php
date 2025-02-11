@@ -1,3 +1,34 @@
+<!-- Document Modal -->
+<div class="modal fade" id="documentModal" tabindex="-1" aria-labelledby="documentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="documentModalLabel">Registrar usuarios con documento.</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body row">
+                    <div class="col-12">
+                        <div class="mb-2">
+                            <label for="file" class="form-label">Documento</label>
+                            <input type="file" class="form-control" id="file" name="file" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">Ingrese un documento valido. (.xls | .xlsx)</div>
+                        </div>
+                    </div>
+                    @error('file')
+                    <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Modal para crear usuarios -->
 <div class="modal fade" id="altamodal" tabindex="-1" aria-labelledby="altaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -44,13 +75,13 @@
                     <div class="col-12 pt-2">
                         <label class="form-check-label">Sexo:</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sexo" id="sexo" value="1">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexo" value="F">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Femenino
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sexo" id="sexo" value="0">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexo" value="M">
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Masculino
                             </label>

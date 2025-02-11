@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
 use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
 {
@@ -170,5 +171,16 @@ class UsersController extends Controller
         } else {
             return redirect()->route('users.view')->with('error', 'Usuario no encontrado.');
         }
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls'
+        ]);
+
+        Excel::import(new UsersImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Datos importados correctamente.');
     }
 }

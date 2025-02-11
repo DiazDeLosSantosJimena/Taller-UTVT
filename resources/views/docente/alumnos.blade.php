@@ -25,14 +25,14 @@
             </thead>
 
             <tbody>
-                @foreach($alumnos as $alumno)
+            @foreach($alumnos as $alumno)
                 <tr>
                     <td class="center">{{ $alumno->matricula }}</td>
                     <td>{{ $alumno->name .' '. $alumno->app .' '. $alumno->apm }}</td>
                     <td>{{ $alumno->email }}</td>
                     <td>{{ $alumno->carrera }}</td>
                     <td class="center">{{ $alumno->genero }}</td>
-                    <td class="center">0%</td>
+                    <td class="center" id="porcentaje{{ $alumno->id }}">0%</td>
                     <td class="center">
                         <a class="waves-effect waves-light btn white black-text disabled">Constancia</a>
                     </td>
@@ -57,5 +57,19 @@
         <p>Si desea registrar la asistencia del día de hoy puede hacerlo accediendo atraves del botón con el icono del lapiz.</p>
     </div>
 </div>
+
+
+@section('js')
+<script>
+    let porcentajes = @json($porcentajes) // Convertimos JSON de PHP a JS
+
+    porcentajes.forEach( porcentaje => {
+        rowID = `porcentaje${porcentaje.user_id}`
+        rowDom = document.getElementById(rowID);
+
+        rowDom.textContent = parseInt(porcentaje.porcentaje_asistencia)+'%'
+    })
+</script>
+@endsection
 
 @endsection

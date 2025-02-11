@@ -6,12 +6,25 @@
         <h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
     </div>
     <div class="col-sm-6 col-md-6 p-4 d-flex justify-content-end">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#altamodal">
-            Añadir
-        </button>
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Añadir
+            </button>
+            <ul class="dropdown-menu">
+                <!-- Button trigger modal -->
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#altamodal">Formulario</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#documentModal">Documento .xlsx | .xls</a></li>
+            </ul>
+        </div>
     </div>
 </div>
+
+@if(session('success'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Exito!</strong> {{ session('success') }}.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 
 <!-- Table ADMI-->
 <div class="card shadow mb-4">
@@ -74,9 +87,9 @@
                             @endif
                         </td>
                         <td>
-                            @if($user->sexo == 1)
+                            @if($user->sexo == 'F')
                             Femenino
-                            @elseif($user->sexo == 0)
+                            @elseif($user->sexo == 'M')
                             Masculino
                             @endif
                         </td>
