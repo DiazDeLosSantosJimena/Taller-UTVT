@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Imports\UsersImport;
+use App\Models\AlumnoTaller;
 use App\Models\Roles;
+use App\Models\Talleres;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,22 +13,45 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('welcome');
     }
 
-    public function show(){
+    public function viewAlumno()
+    {
+        $talleres = Talleres::select('talleres.id', 'nombre_taller', 'horarios')
+            ->join('alumno_tallers', 'alumno_tallers.taller_id', 'talleres.id')
+            ->where('alumno_tallers.user_id', '=', Auth()->user()->id)
+            ->get();
+        
+        $periodos = AlumnoTaller::select('alumno_tallers.id', 'constancia', 'p.fecha_inicio', 'p.fecha_fin', 't.nombre_taller')
+        ->join('talleres as t', 't.id', 'alumno_tallers.taller_id')
+        ->join('asistencia as a', 'a.alumtalle_id', 'alumno_tallers.id')
+        ->join('periodos as p', 'p.id', 'a.periodo_id')
+        ->where('alumno_tallers.user_id', '=', Auth()->user()->id)
+        ->distinct()
+        ->get();
+
+
+        return view('alumno.index', compact('talleres','periodos'));
+    }
+
+    public function show()
+    {
         $usuarios = User::all();
         $roles = Roles::all();
         return view('admin.users.index', compact('usuarios', 'roles'));
     }
 
-    public function create() {
+    public function create()
+    {
         // Lógica para mostrar el formulario de creación de usuario
         return view('users.create');
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         //  Validaciones
         $messages = [
             'name.required' => 'Es necesario colocar un nombre.',
@@ -101,7 +126,8 @@ class UsersController extends Controller
         return redirect()->route('users.show')->with('success', 'Usuario creado exitosamente');
     }
 
-    public function edit(Request $request, $id) {
+    public function edit(Request $request, $id)
+    {
         //  Mensajes de validación
         $messages = [
             'name.required' => 'Es necesario colocar un nombre.',
@@ -158,7 +184,7 @@ class UsersController extends Controller
             $user->genero = $request->input('genero');
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));
-            
+
 
             // Actualiza campos específicos según el rol
             if ($user->rol_id == 3) { // Estudiante

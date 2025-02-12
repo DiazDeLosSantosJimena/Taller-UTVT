@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EventosPublicacionesController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TalleresController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
@@ -50,6 +51,10 @@ Route::get('/talleres-docente',[DocenteController::class, 'index']);
 Route::name('alumnos-taller')->get('alumnos-taller/{id}', [DocenteController::class, 'alumnos_taller']);
 Route::name('asistencia')->get('asistencia/{id}', [DocenteController::class, 'asistenciaView']);
 Route::post('asistencia/register', [DocenteController::class, 'asistenciaRegister'])->name('asistenciaRegister');
+
+//  Alumnos
+Route::get('/talleres-alumno',[UsersController::class, 'viewAlumno']);
+Route::get('/constancia', [PDFController::class, 'generarPDF']);
 
 Route::get('/inicio', [UsersController::class, 'index']);
 Route::name('admin')->get('/admin', [Controller::class, 'index']);

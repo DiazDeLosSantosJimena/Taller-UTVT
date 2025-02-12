@@ -45,10 +45,10 @@ class DocenteController extends Controller
         // Total de asistencias
         // Filtrar por taller_id si se proporciona
         $porcentajes = DB::table('asistencia_porcentaje')
-        ->join('alumno_tallers', 'asistencia_porcentaje.user_id', '=', 'alumno_tallers.user_id')
-        ->where('alumno_tallers.taller_id', $id)
-        ->select('asistencia_porcentaje.*')
-        ->get();
+            ->join('alumno_tallers', 'asistencia_porcentaje.user_id', '=', 'alumno_tallers.user_id')
+            ->where('alumno_tallers.taller_id', $id)
+            ->select('asistencia_porcentaje.*')
+            ->get();
 
         // dd($porcentajes);
 
@@ -59,7 +59,7 @@ class DocenteController extends Controller
             ->where('talleres.id', '=', $id)
             ->get();
 
-        return view('docente.alumnos',[
+        return view('docente.alumnos', [
             'alumnos' => $alumnos,
             'taller' => $taller,
             'porcentajes' => $porcentajes
