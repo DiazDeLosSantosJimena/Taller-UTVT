@@ -26,11 +26,32 @@
 <div class="section">
     <div class="row" style="padding-top: 0.75rem;">
         <div class="col s12 m6">
-            <h3>Título</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At error voluptates ratione a harum rem ipsam quasi eum enim perferendis minima incidunt architecto, impedit porro quo dicta, molestiae quos dolorem!</p>
+            <h3>¡Únete a nuestros talleres culturales y deportivos! <br>
+                🎭⚽🎨🏀🏐</h3>
+            <p>
+<br>
+                Descubre tu pasión y desarrolla nuevas habilidades en nuestros talleres culturales y deportivos. Ya sea que te guste el arte, la música, el teatro o el deporte, tenemos una opción para ti.
+    <br>
+    <br>
+                📌 Talleres culturales: <br> <br>
+                🎨 Artes visuales <br>
+                🎭 Teatro <br>
+                🎶 Rondalla <br>
+                ✍️ Ortografía y redacción <br>
+                <br>
+                <br>
+                📌 Talleres deportivos: <br><br>
+                🏐 Voleibol <br>
+                ⚽ Fútbol <br>
+                🏀 Básquetbol <br>
+                🏈 Tocho bandera <br>
+                💃 Danza <br>
+                <br>
+                No importa tu nivel de experiencia, ¡solo necesitas ganas de aprender y divertirte! Inscríbete y forma parte de una comunidad llena de talento y energía. <br>
+                ¡No te quedes fuera! 🎉</p>
         </div>
         <div class="col s12 m6">
-            <img class="materialboxed" width="450" src="{{ asset('img/TalleresUTVT.jpg') }}">
+            <img class="materialboxed" width="710" src="{{ asset('img/TalleresUTVT.jpg') }}">
         </div>
     </div>
 
@@ -44,7 +65,7 @@
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-image">
-                    <img src="images/sample-1.jpg">
+                    <img src="">
                     <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modalvolei"><i class="material-icons">info</i></a>
                 </div>
                 <div class="card-content">
@@ -56,8 +77,8 @@
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-image">
-                    <img src="images/sample-1.jpg">
-                    <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">add</i></a>
+                    <img src="">
+                    <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modalbasquet"><i class="material-icons">info</i></a>
                 </div>
                 <div class="card-content">
                     <span class="card-title">Basquetbol</span>
@@ -69,10 +90,82 @@
             <div class="card">
                 <div class="card-image">
                     <img src="images/sample-1.jpg">
-                    <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">add</i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modalfutbol"><i class="material-icons">info</i></a>
                 </div>
                 <div class="card-content">
                     <span class="card-title">Futbol</span>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta de tocho -->
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modaltocho"><i class="material-icons">info</i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Tocho</span>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta de danza -->
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modaldanza"><i class="material-icons">info</i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Danza</span>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta de rondalla -->
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modalrondalla"><i class="material-icons">info</i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Rondalla</span>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta de teatro -->
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modalteatro"><i class="material-icons">info</i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Teatro</span>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta de ortografia -->
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modalortografia"><i class="material-icons">info</i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Ortografía y redacción</span>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta de artes -->
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <a class="btn-floating halfway-fab waves-effect waves-light green modal-trigger" href="#modalartes"><i class="material-icons">info</i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Artesa visuales</span>
                 </div>
             </div>
         </div>
@@ -104,7 +197,7 @@
 <br><br>
 
 
-<!-- Modal Structure -->
+<!-- Modal Structure Volei -->
 <div id="modalvolei" class="modal">
     <div class="modal-content">
         <div class="row">
@@ -124,6 +217,230 @@
                 <h2>Voleibol</h2>
                 <br><br>
                 <h5 class="light">Es un deporte donde dos equipos se enfrentan sobre un terreno de juego liso separados por una red central, tratando de pasar el balón por encima de la red hacia el suelo del campo contrario.</h5>
+                <div class="center" style="padding-top: 10px;">
+                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure Basquet -->
+<div id="modalbasquet" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 m6">
+                <img class="materialboxed" width="300" src="{{ asset('img/BASQUETBOL.jpg') }}">
+                <div style="padding-top: 20px;">
+                    <label class="active">Docente:</label>
+                    <h6 class="light">Ernesto Díaz Covarrubias</h6>
+                </div>
+                <div style="padding-top: 15px;">
+                    <label class="active">Taller</label>
+                    <br>
+                    <div class="chip">Deportivo</div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <h2>Basquetbol</h2>
+                <br><br>
+                <h5 class="light">El baloncesto es un deporte de equipo jugado entre dos conjuntos de cinco jugadores cada uno. El objetivo es encestar el balón en la canasta del equipo contrario para sumar puntos. Se juega en una cancha rectangular con un aro a cada extremo. El equipo con más puntos al final del tiempo reglamentario gana. Se caracteriza por su dinamismo, el dribbling, los pases y los tiros.</h5>
+                <div class="center" style="padding-top: 10px;">
+                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure Futbol -->
+<div id="modalfutbol" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 m6">
+                <img class="materialboxed" width="300" src="{{ asset('img/FUTBOL.jpg') }}">
+                <div style="padding-top: 20px;">
+                    <label class="active">Docente:</label>
+                    <h6 class="light">Ruben Salvador Martínez Reyes</h6>
+                </div>
+                <div style="padding-top: 15px;">
+                    <label class="active">Taller</label>
+                    <br>
+                    <div class="chip">Deportivo</div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <h2>Futbol Soccer </h2>
+                <br><br>
+                <h5 class="light">Deporte de equipo donde 11 jugadores buscan anotar goles pateando un balón en la portería contraria. Se juega en una cancha rectangular y gana el equipo con más goles.</h5>
+                <div class="center" style="padding-top: 10px;">
+                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure tocho -->
+<div id="modaltocho" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 m6">
+                <img class="materialboxed" width="300" src="{{ asset('img/TOCHO.jpg') }}">
+                <div style="padding-top: 20px;">
+                    <label class="active">Docente:</label>
+                    <h6 class="light">Ernesto Díaz Covarrubias</h6>
+                </div>
+                <div style="padding-top: 15px;">
+                    <label class="active">Taller</label>
+                    <br>
+                    <div class="chip">Deportivo</div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <h2>Tocho</h2>
+                <br><br>
+                <h5 class="light">Variante del fútbol americano sin contacto, donde los jugadores deben quitar una cinta o bandera del rival en lugar de taclearlo para detener la jugada.</h5>
+                <div class="center" style="padding-top: 10px;">
+                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure Danza -->
+<div id="modaldanza" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 m6">
+                <img class="materialboxed" width="300" src="{{ asset('img/DANZA.jpg') }}">
+                <div style="padding-top: 20px;">
+                    <label class="active">Docente:</label>
+                    <h6 class="light">José Pablo Hernández Sánchez</h6>
+                </div>
+                <div style="padding-top: 15px;">
+                    <label class="active">Taller</label>
+                    <br>
+                    <div class="chip">Cultural</div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <h2>Danza y baile</h2>
+                <br><br>
+                <h5 class="light">Expresión artística a través del movimiento del cuerpo, generalmente acompañada de música. Puede ser de distintos estilos y culturas.</h5>
+                <div class="center" style="padding-top: 10px;">
+                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure Rondalla -->
+<div id="modalrondalla" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 m6">
+                <img class="materialboxed" width="300" src="{{ asset('img/RONDALLA.jpg') }}">
+                <div style="padding-top: 20px;">
+                    <label class="active">Docente:</label>
+                    <h6 class="light">José Arturo Guerra Phérez</h6>
+                </div>
+                <div style="padding-top: 15px;">
+                    <label class="active">Taller</label>
+                    <br>
+                    <div class="chip">Cultural</div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <h2>Rondalla</h2>
+                <br><br>
+                <h5 class="light">Agrupación musical que interpreta canciones con instrumentos de cuerda, como guitarras y laúdes, generalmente con un estilo romántico y tradicional.</h5>
+                <div class="center" style="padding-top: 10px;">
+                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure Teatro -->
+<div id="modalteatro" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 m6">
+                <img class="materialboxed" width="300" src="{{ asset('img/TEATRO.jpg') }}">
+                <div style="padding-top: 20px;">
+                    <label class="active">Docente:</label>
+                    <h6 class="light">Aldo Colín Suárez</h6>
+                </div>
+                <div style="padding-top: 15px;">
+                    <label class="active">Taller</label>
+                    <br>
+                    <div class="chip">Cultural</div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <h2>Teatro</h2>
+                <br><br>
+                <h5 class="light">Representación escénica donde actores interpretan personajes para contar historias ante un público, combinando actuación, escenografía y vestuario.</h5>
+                <div class="center" style="padding-top: 10px;">
+                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure Ortografia -->
+<div id="modalortografia" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 m6">
+                <img class="materialboxed" width="300" src="{{ asset('img/ORTOG.jpg') }}">
+                <div style="padding-top: 20px;">
+                    <label class="active">Docente:</label>
+                    <h6 class="light">Ernesto Díaz Covarrubias</h6>
+                </div>
+                <div style="padding-top: 15px;">
+                    <label class="active">Taller</label>
+                    <br>
+                    <div class="chip">Cultural</div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <h2>Ortografía y redacción</h2>
+                <br><br>
+                <h5 class="light">Disciplina que estudia el correcto uso de las normas del lenguaje escrito y la estructuración adecuada de textos para una comunicación clara y efectiva.</h5>
+                <div class="center" style="padding-top: 10px;">
+                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure Artes -->
+<div id="modalartes" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 m6">
+                <img class="materialboxed" width="300" src="{{ asset('img/ARTES.jpg') }}">
+                <div style="padding-top: 20px;">
+                    <label class="active">Docente:</label>
+                    <h6 class="light">Mauricio Torres Bernal</h6>
+                </div>
+                <div style="padding-top: 15px;">
+                    <label class="active">Taller</label>
+                    <br>
+                    <div class="chip">Cultural</div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <h2>Artes Visuales</h2>
+                <br><br>
+                <h5 class="light">Expresión artística que utiliza medios visuales como la pintura, escultura, fotografía y diseño gráfico para transmitir ideas y emociones.</h5>
                 <div class="center" style="padding-top: 10px;">
                     <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
                 </div>
