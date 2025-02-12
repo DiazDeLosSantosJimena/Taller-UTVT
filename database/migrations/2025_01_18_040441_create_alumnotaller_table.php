@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alumnotaller', function (Blueprint $table) {
+        Schema::create('alumno_tallers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('taller_id')->constrained('talleres');
             $table->boolean('constancia');
-            $table->boolean('estatus');
+            $table->varchar('estatus');
             $table->timestamps();
         });
     }

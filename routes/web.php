@@ -1,7 +1,13 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\EventosPublicacionesController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\TalleresController;
 use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +22,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        switch (Auth::user()->rol_id) {
+            case 1:
+                return redirect('admin');
+                break;
+            case 2:
+                return redirect('/inicio');
+                break;
+            case 3:
+                return redirect('/inicio');
+                break;
+            default:
+                return redirect('/login');
+                break;
+        }
+    }
+    return redirect('/inicio');
 });
 
     //  Login
@@ -24,4 +46,22 @@ Route::get('/login', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/home', [UsersController::class, 'index']);
+//  Docentes
+Route::get('/talleres-docente',[DocenteController::class, 'index']);
+Route::name('alumnos-taller')->get('alumnos-taller/{id}', [DocenteController::class, 'alumnos_taller']);
+Route::name('asistencia')->get('asistencia/{id}', [DocenteController::class, 'asistenciaView']);
+Route::post('asistencia/register', [DocenteController::class, 'asistenciaRegister'])->name('asistenciaRegister');
+
+//  Alumnos
+Route::get('/talleres-alumno',[UsersController::class, 'viewAlumno']);
+Route::get('/constancia', [PDFController::class, 'generarPDF']);
+
+Route::get('/inicio', [UsersController::class, 'index']);
+Route::name('admin')->get('/admin', [Controller::class, 'index']);
+Route::name('agregar_periodo')->post('nuevoPeriodo', [Controller::class, 'newPeriodo']);
+
+Route::resource('/users', UsersController::class);
+Route::name('users.show')->get('/users/show', [UsersController::class, 'show']);
+Route::post('/import', [UsersController::class, 'import'])->name('import');
+Route::resource('/publicaciones', EventosPublicacionesController::class);
+Route::resource('/taller', TalleresController::class);

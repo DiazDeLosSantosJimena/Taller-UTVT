@@ -15,7 +15,11 @@
             <h4 class="light">DEPORTIVOS Y CULTURALES</h4>
         </div>
         <div class="row center">
-            <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light green">Inscribete Ahora!</a>
+            @if(session('taller') === false)
+                <a href="#talleres" id="download-button" class="btn-large waves-effect waves-light green">Inscribete Ahora!</a>
+            @else
+                <a href="@if(auth()->user()->rol_id === 2) /talleres-docente @elseif(auth()->user()->rol_id === 3) /talleres-alumno @endif" id="download-button" class="btn-large waves-effect waves-light green">Mi taller!</a>
+            @endif
         </div>
         <br><br>
 
@@ -55,7 +59,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="talleres">
         <div class="col s12 m12 center">
             <h4>Nuestros Talleres</h4>
             <p>La Universidad Tecnológica del Valle de Toluca ofrece talleres deportivos y culturales para la comunidad universitaria.</p>
