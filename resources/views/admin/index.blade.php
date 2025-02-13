@@ -1,101 +1,81 @@
-@extends('layout dashboard.navbar')
-@section('title','Inicio')
+@extends('layout.layoutAdmin')
 @section('content')
+<?php
+$fecha_actual = date("Y-m-d");
+?>
 
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
-                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+<h1 class="my-4">Inicio</h1>
+
+@if(!$periodo || $fecha_actual >= $fecha_fin)
+<div class="row">
+    <div class="col-12">
+        <h1>Registro de Periodo</h1>
+        <p>En esté apartado se establecera el periodo con el que se harán los registos de las asistencias para los talleres.</p>
+    </div>
+    <div class="col-6 pt-5 text-center">
+        <form action="{{ route('agregar_periodo') }}" method="post" enctype="multipart/form-data">
+            {!! csrf_field() !!}
+            <h5>Fecha de inicio del periodo</h5>
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="dd/mm/yyyy">
+    </div>
+    <div class="col-6 pt-5 text-center">
+        <h5>Fecha de fin del periodo</h5>
+        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="dd/mm/yyyy">
+    </div>
+    <div class="col-12 py-5 text-center">
+        <button class="btn btn-success" type="submit">Establecer</button>
+        </form>
+    </div>
+</div>
+@else
+<div class="row">
+    <div class="col">
+        <h4>Periodo</h4>
+        <p>{{ $periodo->fecha_inicio .' | '. $periodo->fecha_fin }}</p>
+    </div>
+</div>
+@endif
+
+<div class="row justify-content-center p-4">
+    <div class="col-sm-12 col-md-4">
+        <div class="card bg-primary border-dark mb-3 shadow" style="max-width: 18rem;">
+            <div class="card-body text-center">
+                <h5 class="card-title">Registros</h5>
+                <p class="card-text">Creación, lectura, edición y eliminación de los registros.</p>
             </div>
-            <p>
-                <a href="/logout">Cerrar Sesión</a>
-            </p>
-            <!-- Content Row -->
-            <div class="row">
-
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-primary shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Earnings (Monthly)</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Earnings (Annual)</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-info shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                    </div>
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-auto">
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="progress progress-sm mr-2">
-                                                <div class="progress-bar bg-info" role="progressbar"
-                                                    style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pending Requests Card Example -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-warning shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                        Pending Requests</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <ul class="collapse list-group list-group-flush" id="collapseExample">
+                <li class="list-group-item"><a href="{{ route('users.show') }}"><i class="bi bi-people-fill"></i> Usuarios...</a></li>
+                <li class="list-group-item"><a href="{{ route('taller.index') }}"><i class="bi bi-boxes"></i> Talleres...</a></li>
+            </ul>
+            <div class="card-footer text-center">
+                <a class="card-link text-reset" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Opciones...</a>
             </div>
+
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="card bg-success border-dark mb-3 text-center shadow" style="max-width: 18rem;">
+            <div class="card-body text-dark">
+                <h5 class="card-title">Publicaciones</h5>
+                <p class="card-text">Avisos/Convocatorias sobre los talleres.</p>
+            </div>
+            <div class="card-footer bg-transparent border-dark">
+                <a href="{{ route('publicaciones.index') }}" class="card-link text-reset">Ir...</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="card bg-warning border-dark mb-3 text-center shadow" style="max-width: 18rem;">
+            <div class="card-body text-dark">
+                <h5 class="card-title">Eventos</h5>
+                <p class="card-text">Eventos sobre los diferentes talleres.</p>
+            </div>
+            <div class="card-footer bg-transparent border-dark">
+                <a href="#" class="card-link text-reset">Ir...</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
