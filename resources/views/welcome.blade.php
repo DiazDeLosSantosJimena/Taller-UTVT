@@ -2,7 +2,7 @@
 @section('css')
 <style>
     .nav-background {
-        background-image: url('{{ asset('img/patrones-talleres.png') }}');
+        background-image: url('{{ asset(' img/patrones-talleres.png') }}');
     }
 </style>
 @endsection
@@ -14,12 +14,12 @@
             <h1>TALLERES</h1>
             <h4 class="light">DEPORTIVOS Y CULTURALES</h4>
         </div>
-        
+
         <div class="row center">
             @if(session('taller') === false)
-                <a href="#talleres" id="download-button" class="btn-large waves-effect waves-light green">Inscribete Ahora!</a>
+            <a href="#talleres" id="download-button" class="btn-large waves-effect waves-light green">Inscribete Ahora!</a>
             @else
-              
+
             @endif
         </div>
         <br><br>
@@ -34,10 +34,10 @@
             <h3>¡Únete a nuestros talleres culturales y deportivos! <br>
                 🎭⚽🎨🏀🏐</h3>
             <p>
-<br>
+                <br>
                 Descubre tu pasión y desarrolla nuevas habilidades en nuestros talleres culturales y deportivos. Ya sea que te guste el arte, la música, el teatro o el deporte, tenemos una opción para ti.
-    <br>
-    <br>
+                <br>
+                <br>
                 📌 Talleres culturales: <br> <br>
                 🎨 Artes visuales <br>
                 🎭 Teatro <br>
@@ -53,10 +53,11 @@
                 💃 Danza <br>
                 <br>
                 No importa tu nivel de experiencia, ¡solo necesitas ganas de aprender y divertirte! Inscríbete y forma parte de una comunidad llena de talento y energía. <br>
-                ¡No te quedes fuera! 🎉</p>
+                ¡No te quedes fuera! 🎉
+            </p>
         </div>
         <div class="col s12 m6">
-            <img class="materialboxed" width="710" src="{{ asset('img/TalleresUTVT.jpg') }}">
+            <img class="materialboxed" width="450" src="{{ asset('img/TalleresUTVT.jpg') }}">
         </div>
     </div>
 

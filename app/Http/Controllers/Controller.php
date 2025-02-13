@@ -14,8 +14,14 @@ class Controller extends BaseController
 
     public function index() {
         $periodo = Periodo::latest()->first();
-        // dd($periodo);
-        return view('admin.index', compact('periodo'));
+
+        if($periodo != null){
+            $fecha_fin = $periodo->fecha_fin;
+            return view('admin.index', compact('periodo', 'fecha_fin'));
+        }else{
+            $fecha_fin = "2001-09-03";
+            return view('admin.index', compact('periodo', 'fecha_fin'));
+        }
     }
 
     public function newPeriodo(Request $request) {
@@ -38,6 +44,6 @@ class Controller extends BaseController
             'fecha_fin' => $request->input('fecha_fin')
         ));
 
-        return redirect('home');
+        return redirect('/');
     }
 }
