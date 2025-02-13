@@ -30,7 +30,7 @@
 
 /* Botón más llamativo */
 .btn-floating {
-  background: hsla(118, 76%, 48%, 0.877) !important;
+  /* background: hsla(118, 76%, 48%, 0.877) !important; */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 

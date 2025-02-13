@@ -45,7 +45,7 @@ $session_taller = session('taller')
         <h5 class="modal-title" id="crearEventoModalLabel">Crear Nuevo Evento</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
-      <form id="uploadForm" enctype="multipart/form-data" method="POST" action="{{ route('.store') }}">
+      <form id="uploadForm" enctype="multipart/form-data" method="POST" action="#">
         @csrf
         <div class="modal-body">
           <div class="mb-3">

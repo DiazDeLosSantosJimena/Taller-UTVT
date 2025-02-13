@@ -45,10 +45,16 @@
 
 
 <div class="fixed-action-btn">
-    <a class="btn-floating btn-large blue" id="asistencia" href="{{ route('asistencia', ['id' => $taller->id]) }}">
-        <i class="large material-icons">mode_edit</i>
-    </a>
+  <a class="btn-floating btn-large blue" id="asistencia">
+    <i class="large material-icons">menu</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating red" href="#eventos"><i class="material-icons">art_track</i></a></li>
+    <li><a class="btn-floating blue" href="#avisos"><i class="material-icons">message</i></a></li>
+    <li><a class="btn-floating green" href="{{ route('asistencia', ['id' => $taller->id]) }}"><i class="material-icons">assignment_turned_in</i></a></li>
+  </ul>
 </div>
+      
 
 <!-- Tap Target Structure -->
 <div class="tap-target cyan" data-target="asistencia">
