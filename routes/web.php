@@ -63,5 +63,11 @@ Route::name('agregar_periodo')->post('nuevoPeriodo', [Controller::class, 'newPer
 Route::resource('/users', UsersController::class);
 Route::name('users.show')->get('/users/show', [UsersController::class, 'show']);
 Route::post('/import', [UsersController::class, 'import'])->name('import');
-Route::resource('/publicaciones', EventosPublicacionesController::class);
+
 Route::resource('/taller', TalleresController::class);
+
+// Publicaciones
+
+Route::resource('/publicaciones', EventosPublicacionesController::class);
+Route::get('/publicaciones', [EventosPublicacionesController::class, 'index'])->name('publicaciones.index');
+Route::post('/publicaciones', [EventosPublicacionesController::class, 'store'])->name('publicaciones.store');

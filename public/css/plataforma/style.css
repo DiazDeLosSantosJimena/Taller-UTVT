@@ -13,7 +13,6 @@
 	font-size: inherit;
 }
 
-<<<<<<< HEAD
 /* Estilos para mejorar las tarjetas */
 .card-image {
   display: flex;
@@ -41,7 +40,6 @@
   transition: all 0.3s ease;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
-=======
 /* Padding estilo bootstrap */
 
 /* Clases de padding */
@@ -99,4 +97,3 @@
 .pl-3 { padding-left: 1rem !important; }
 .pl-4 { padding-left: 1.5rem !important; }
 .pl-5 { padding-left: 3rem !important; }
->>>>>>> dev_joss

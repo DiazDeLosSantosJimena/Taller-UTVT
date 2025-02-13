@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('taller_id')->constrained('talleres');
             $table->boolean('constancia');
-            $table->varchar('estatus');
+            $table->string('estatus');
             $table->timestamps();
         });
     }

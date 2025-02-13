@@ -21,20 +21,39 @@ class EventosPublicacionesController extends Controller
      */
     public function create()
     {
-        //
-    }
+        return view('publicaciones.create');
+    }   
+    
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'tipo' => 'required|string|in:anuncio,evento,noticia',
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
+        //Imagen 
+        $rutaImagen = null;
+        if ($request->hasFile('imagen')) {
+            $rutaImagen = $request->file('imagen')->store('publicaciones', 'public');
+        }
+
+        
+        $publicacion = Publicacion::create([
+            'user_id' => Auth::id(),
+            'titulo' => $request->titulo,
+            'descripcion' => $request->descripcion,
+            'tipo' => $request->tipo,
+            'imagen' => $rutaImagen
+        ]);
+
+        return redirect()->route('publicaciones.index')->with('success', 'Publicación creada exitosamente.');
+    }
     public function show(string $id)
     {
         //

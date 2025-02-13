@@ -14,11 +14,12 @@
             <h1>TALLERES</h1>
             <h4 class="light">DEPORTIVOS Y CULTURALES</h4>
         </div>
+        
         <div class="row center">
             @if(session('taller') === false)
                 <a href="#talleres" id="download-button" class="btn-large waves-effect waves-light green">Inscribete Ahora!</a>
             @else
-                <a href="@if(auth()->user()->rol_id === 2) /talleres-docente @elseif(auth()->user()->rol_id === 3) /talleres-alumno @endif" id="download-button" class="btn-large waves-effect waves-light green">Mi taller!</a>
+              
             @endif
         </div>
         <br><br>
