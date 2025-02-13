@@ -2,7 +2,7 @@
 @section('css')
 <style>
     .nav-background {
-        background-image: url('{{ asset(' img/patrones-talleres.png') }}');
+        background-image: url('{{ asset('img/patrones-talleres.png') }}');
     }
 </style>
 @endsection
@@ -16,10 +16,10 @@
         </div>
 
         <div class="row center">
-            @if(session('taller') === false)
-            <a href="#talleres" id="download-button" class="btn-large waves-effect waves-light green">Inscribete Ahora!</a>
+            @if(session('taller'))
+            <a href="@if(auth()->user()->rol_id === 2) /talleres-docente @elseif(auth()->user()->rol_id === 3) /talleres-alumno @endif" id="download-button" class="btn-large waves-effect waves-light green">Mi taller!</a>
             @else
-
+            <a href="#talleres" id="download-button" class="btn-large waves-effect waves-light green">Inscribete Ahora!</a>
             @endif
         </div>
         <br><br>
