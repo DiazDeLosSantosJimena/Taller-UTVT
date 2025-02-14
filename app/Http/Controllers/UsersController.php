@@ -15,7 +15,8 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $talleres =Talleres::all();
+        return view('welcome', compact('talleres'));
     }
 
     public function viewAlumno()

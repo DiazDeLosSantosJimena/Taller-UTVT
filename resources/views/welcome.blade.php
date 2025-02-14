@@ -224,7 +224,7 @@
                 <br><br>
                 <h5 class="light">Es un deporte donde dos equipos se enfrentan sobre un terreno de juego liso separados por una red central, tratando de pasar el balón por encima de la red hacia el suelo del campo contrario.</h5>
                 <div class="center" style="padding-top: 10px;">
-                    <a class="waves-effect waves-light btn-small green darken-3">Inscribirse!</a>
+                    <a class="waves-effect waves-light btn-small green darken-3" id="openFormModal">Inscribirse!</a>
                 </div>
             </div>
         </div>
@@ -454,4 +454,47 @@
         </div>
     </div>
 </div>
+
+<!-- Modal (Formulario de Inscripción) -->
+<div id="modalForm" class="modal">
+    <div class="modal-content">
+        <h4>Formulario de Inscripción</h4>
+        <form action="{{ route('store.taller') }}" method="POST">
+            @csrf
+            <div class="input-field">
+                <input type="text" id="nombre" name="nombre" value="{{Auth::user()->name}}">
+                <label for="nombre">Nombre Completo</label>
+            </div>
+            <div class="input-field">
+                <select name="taller_id" id="taller_id" class="browser-default" required>
+                    <option value="" disabled selected>Selecciona un taller</option>
+                    @foreach($talleres as $taller)
+                        <option value="{{ $taller->id }}">{{ $taller->nombre_taller }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="center" style="padding-top: 10px;">
+                <button type="submit" class="waves-effect waves-light btn green darken-3">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var modal1 = document.getElementById('modalvolei');
+    var modal2 = document.getElementById('modalForm');
+
+    var modalInstance1 = M.Modal.init(modal1);
+    var modalInstance2 = M.Modal.init(modal2);
+
+    document.getElementById('openFormModal').addEventListener('click', function () {
+        modalInstance1.close(); 
+        setTimeout(function () {
+            modalInstance2.open(); 
+        }, 400); 
+    });
+});
+
+</script>
 @endsection

@@ -44,7 +44,7 @@ class EventosPublicacionesController extends Controller
         }
 
         
-        $publicacion = Publicacion::create([
+        $publicacion = Publicaciones::create([
             'user_id' => Auth::id(),
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
