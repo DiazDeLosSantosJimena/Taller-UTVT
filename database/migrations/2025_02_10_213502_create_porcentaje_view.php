@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement("
+        \DB::statement("
             CREATE VIEW asistencia_porcentaje AS
             SELECT 
                 at.user_id,
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::statement("DROP VIEW IF EXISTS asistencia_porcentaje");
+        \DB::statement("DROP VIEW IF EXISTS asistencia_porcentaje");
     }
 };

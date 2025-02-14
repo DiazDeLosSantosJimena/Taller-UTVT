@@ -11,36 +11,31 @@ $session_taller = session('taller')
 @if($session_taller === true)
 <!-- Contenido para los docentes -->
 <div class="row">
-    <div class="col-12 center">
-        <h2>Talleres</h2>
-        <p>Talleres que imparto actualmente.</p>
+  <div class="col-12 center">
+    <h2>Talleres</h2>
+    <p>Talleres que imparto actualmente.</p>
 
-        <!-- Boton para crear un evento -->
-        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearEventoModal">
-            Crear Evento
-        </button>
-    </div>
+    <!-- Boton para crear un evento -->
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearEventoModal">
+      Crear Evento
+    </button>
+  </div>
 
-    @foreach($talleres as $taller)
-    <div class="container-custom pt-3">
-        <div class="col sm-12 md-4">
-            <div class="card center">
-                <div class="card-details">
-                    <p class="text-title">{{ $taller->nombre_taller }}</p>
-                    <p class="text-body">{{ $taller->horarios }}</p>
-                </div>
-                <a href="{{ route('alumnos-taller', ['id' => $taller->id ]) }}" class="card-button">Más información</a>
-            </div>
+  @foreach($talleres as $taller)
+  <div class="container-custom pt-3">
+    <div class="col sm-12 md-4">
+      <div class="card center">
+        <div class="card-details">
+          <p class="text-title">{{ $taller->nombre_taller }}</p>
+          <p class="text-body">{{ $taller->horarios }}</p>
         </div>
+        <a href="{{ route('alumnos-taller', ['id' => $taller->id ]) }}" class="card-button">Más información</a>
+      </div>
     </div>
-    @endforeach
+  </div>
+  @endforeach
 </div>
 
-@else
-<div class="row">
-    <h3 class="center">No tiene ningún taller asignado, comuníquese con sistemas.</h3>
-</div>
-@endif
 
 <!-- Modal -->
 <div class="modal fade" id="crearEventoModal" tabindex="-1" aria-labelledby="crearEventoModalLabel" aria-hidden="true">
@@ -50,7 +45,7 @@ $session_taller = session('taller')
         <h5 class="modal-title" id="crearEventoModalLabel">Crear Nuevo Evento</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
-      <form id="uploadForm" enctype="multipart/form-data" method="POST" action="{{ route('.store') }}">
+      <form id="uploadForm" enctype="multipart/form-data" method="POST" action="#">
         @csrf
         <div class="modal-body">
           <div class="mb-3">
@@ -83,36 +78,49 @@ $session_taller = session('taller')
   </div>
 </div>
 
+
+@section('js')
+<script>
+  document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let input = document.getElementById('imageInput');
+    let file = input.files[0];
+
+    if (file) {
+      let reader = new FileReader();
+      reader.onload = function(e) {
+        let carousel = document.querySelector('.carousel');
+        let newItem = document.createElement('div');
+
+        newItem.className = 'carousel-item';
+        newItem.style.backgroundImage = `url('${e.target.result}')`;
+        newItem.style.backgroundSize = 'cover';
+        newItem.style.backgroundPosition = 'center';
+        newItem.innerHTML = `<h2>Nuevo Evento</h2><p class="white-text">Imagen agregada</p>`;
+
+        carousel.appendChild(newItem);
+
+        // Recargar el carrusel para actualizar
+        var instance = M.Carousel.getInstance(carousel);
+        instance.destroy();
+        M.Carousel.init(carousel, {
+          fullWidth: true,
+          indicators: true
+        });
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
 @endsection
 
-<script>
-    document.getElementById('uploadForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        let input = document.getElementById('imageInput');
-        let file = input.files[0];
-    
-        if (file) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                let carousel = document.querySelector('.carousel');
-                let newItem = document.createElement('div');
-    
-                newItem.className = 'carousel-item';
-                newItem.style.backgroundImage = `url('${e.target.result}')`;
-                newItem.style.backgroundSize = 'cover';
-                newItem.style.backgroundPosition = 'center';
-                newItem.innerHTML = `<h2>Nuevo Evento</h2><p class="white-text">Imagen agregada</p>`;
-    
-                carousel.appendChild(newItem);
-    
-                // Recargar el carrusel para actualizar
-                var instance = M.Carousel.getInstance(carousel);
-                instance.destroy();
-                M.Carousel.init(carousel, { fullWidth: true, indicators: true });
-            };
-    
-            reader.readAsDataURL(file);
-        }
-    });
-    </script>
+
+@else
+<div class="row">
+  <h3 class="center">No tiene ningún taller asignado, comuníquese con sistemas.</h3>
+</div>
+@endif
+
+@endsection

@@ -1,6 +1,41 @@
 @extends('layout.layoutAdmin')
 @section('content')
+<?php
+$fecha_actual = date("Y-m-d");
+?>
+
 <h1 class="my-4">Inicio</h1>
+
+@if(!$periodo || $fecha_actual >= $fecha_fin)
+<div class="row">
+    <div class="col-12">
+        <h1>Registro de Periodo</h1>
+        <p>En esté apartado se establecera el periodo con el que se harán los registos de las asistencias para los talleres.</p>
+    </div>
+    <div class="col-6 pt-5 text-center">
+        <form action="{{ route('agregar_periodo') }}" method="post" enctype="multipart/form-data">
+            {!! csrf_field() !!}
+            <h5>Fecha de inicio del periodo</h5>
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="dd/mm/yyyy">
+    </div>
+    <div class="col-6 pt-5 text-center">
+        <h5>Fecha de fin del periodo</h5>
+        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="dd/mm/yyyy">
+    </div>
+    <div class="col-12 py-5 text-center">
+        <button class="btn btn-success" type="submit">Establecer</button>
+        </form>
+    </div>
+</div>
+@else
+<div class="row">
+    <div class="col">
+        <h4>Periodo</h4>
+        <p>{{ $periodo->fecha_inicio .' | '. $periodo->fecha_fin }}</p>
+    </div>
+</div>
+@endif
+
 <div class="row justify-content-center p-4">
     <div class="col-sm-12 col-md-4">
         <div class="card bg-primary border-dark mb-3 shadow" style="max-width: 18rem;">
@@ -42,30 +77,5 @@
     </div>
 </div>
 
-<?php
-    $fecha_actual = date("Y-m-d");
-?>
-@if(!($fecha_actual >= $periodo->fecha_inicio && $fecha_actual <= $periodo->fecha_fin) || $periodo === null)
-<div class="row">
-    <div class="col-12">
-        <h1>Registro de Periodo</h1>
-        <p>En esté apartado se establecera el periodo con el que se harán los registos de las asistencias para los talleres.</p>
-    </div>
-    <form action="{{ route('agregar_periodo') }}" method="post" enctype="multipart/form-data">
-        {!! csrf_field() !!}
-        <div class="col-6 pt-5 text-center">
-            <h5>Fecha de inicio del periodo</h5>
-            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="dd/mm/yyyy">
-        </div>
-        <div class="col-6 pt-5 text-center">
-            <h5>Fecha de fin del periodo</h5>
-            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="dd/mm/yyyy">
-        </div>
-        <div class="col-12 py-5 text-center">
-            <button class="btn btn-success" type="submit">Establecer</button>
-        </div>
-    </form>
-</div>
-@endif
 
 @endsection
