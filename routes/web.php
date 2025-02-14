@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlumnoTallerController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DocenteController;
@@ -67,7 +68,9 @@ Route::post('/import', [UsersController::class, 'import'])->name('import');
 Route::resource('/taller', TalleresController::class);
 
 // Publicaciones
-
 Route::resource('/publicaciones', EventosPublicacionesController::class);
 Route::get('/publicaciones', [EventosPublicacionesController::class, 'index'])->name('publicaciones.index');
 Route::post('/publicaciones', [EventosPublicacionesController::class, 'store'])->name('publicaciones.store');
+
+//AlumnosTalleres
+Route::post('/inscribirse-taller', [AlumnoTallerController::class, 'store'])->name('store.taller');
