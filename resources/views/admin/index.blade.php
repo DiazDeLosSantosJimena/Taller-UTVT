@@ -46,6 +46,7 @@ $fecha_actual = date("Y-m-d");
             <ul class="collapse list-group list-group-flush" id="collapseExample">
                 <li class="list-group-item"><a href="{{ route('users.show') }}"><i class="bi bi-people-fill"></i> Usuarios...</a></li>
                 <li class="list-group-item"><a href="{{ route('taller.index') }}"><i class="bi bi-boxes"></i> Talleres...</a></li>
+                <li class="list-group-item"><a href="{{ route('tallerdocen.index') }}"><i class="bi bi-boxes"></i> Docentes Talleres...</a></li>
             </ul>
             <div class="card-footer text-center">
                 <a class="card-link text-reset" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Opciones...</a>

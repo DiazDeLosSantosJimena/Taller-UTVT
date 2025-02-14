@@ -7,6 +7,7 @@ use App\Http\Controllers\EventosPublicacionesController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TalleresController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DocentesTallerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,8 @@ Route::name('users.show')->get('/users/show', [UsersController::class, 'show']);
 Route::post('/import', [UsersController::class, 'import'])->name('import');
 
 Route::resource('/taller', TalleresController::class);
+Route::resource('/tallerdocen',DocentesTallerController::class);
+Route::name('deletetalledo')->delete('deletetalledo/{id}', [DocentesTallerController::class, 'destroy']);
 
 // Publicaciones
 

@@ -4,7 +4,7 @@
     <div class="row">
         <!-- Page Heading -->
         <div class="col-sm-6 col-md-6 pt-4">
-            <h1 class="h3 mb-0 text-gray-800">Talleres</h1>
+            <h1 class="h3 mb-0 text-gray-800">Docente talleres </h1>
         </div>
         <div class="col-sm-6 col-md-6 p-4 d-flex justify-content-end">
             <!-- Button trigger modal -->
@@ -22,7 +22,7 @@
     <!-- Table Talleres-->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-success">Tabla de talleres registrados</h6>
+            <h6 class="m-0 font-weight-bold text-success">Tabla de Docentes y Taller respectivo</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -30,9 +30,8 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Nombre del docente</th>
                             <th>Nombre del taller</th>
-                            <th>Horarios</th>
-                            <th>Ubicación</th>
                             <th class="text-center">Acción</th>
                             <th class="text-center">Acción</th>
                         </tr>
@@ -40,29 +39,27 @@
                     <tfoot>
                         <tr>
                             <th>#</th>
+                            <th>Nombre del docente</th>
                             <th>Nombre del taller</th>
-                            <th>Horarios</th>
-                            <th>Ubicación</th>
                             <th class="text-center">Acción</th>
                             <th class="text-center">Acción</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($talleres as $talle)
+                        @foreach ($talleresdocen as $talled)
                             <tr class="text-center">
-                                <td class="text-center">{{ $talle->id }}</td>
-                                <td>{{ $talle->nombre_taller }}</td>
-                                <td>{{ $talle->horarios }}</td>
-                                <td>{{ $talle->ubicacion }}</td>
+                                <td class="text-center">{{ $talled->talleres_users_id }}</td>
+                                <td>{{ $talled->name }} {{ $talled->app }} {{ $talled->apm }}</td>
+                                <td>{{ $talled->nombre_taller }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#updateModal{{ $talle->id }}">
+                                        data-bs-target="#">
                                         Editar
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#deletemodal{{ $talle->id }}">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal{{ $talled->talleres_users_id }}">
                                         Borrar
                                     </button>
                                 </td>
@@ -77,5 +74,5 @@
     <!-- END TABLE ADMI -->
 @endsection
 @section('modals')
-    @include('admin.talleres.modales')
+    @include('admin.talleresusers.modales')
 @endsection
