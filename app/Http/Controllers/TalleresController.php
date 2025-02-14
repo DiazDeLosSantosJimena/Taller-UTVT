@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class TalleresController extends Controller
 {
-
     public function index()
     {
+
         $talleres = Talleres::all();
-        return view('admin.talleres.index', compact('talleres'));
+        return view('talleres.index', compact('talleres'));
     }
 
     public function create()
@@ -43,18 +43,9 @@ class TalleresController extends Controller
         return redirect()->route('taller.index')->with('success', 'Taller creado exitosamente');
     }
 
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
 
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
         $rules = [
             'nombre_taller' => 'required',
             'horarios' => 'required',
@@ -76,10 +67,6 @@ class TalleresController extends Controller
         $talle->save();
 
         return redirect()->route('taller.index')->with('success', 'Taller actualizado exitosamente.');
-    }
 
-    public function destroy(string $id)
-    {
-        //
     }
 }
