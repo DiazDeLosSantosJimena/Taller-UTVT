@@ -43,28 +43,3 @@
   </div>
 </div>
 
-<script>
-  document.getElementById('form-publicacion').addEventListener('submit', function(event) {
-      event.preventDefault();
-  
-      let formData = new FormData(this);
-  
-      fetch("{{ route('publicaciones.store') }}", {
-          method: "POST",
-          body: formData,
-          headers: {
-              'X-CSRF-TOKEN': '{{ csrf_token() }}'
-          }
-      })
-      .then(response => response.json())
-      .then(data => {
-          if (data.success) {
-              alert("Publicación creada con éxito");
-              window.location.reload(); // Recargar la página para mostrar la nueva publicación
-          } else {
-              alert("Error al crear la publicación");
-          }
-      })
-      .catch(error => console.error('Error:', error));
-  });
-  </script>
