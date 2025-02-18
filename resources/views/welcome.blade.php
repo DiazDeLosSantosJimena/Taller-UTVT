@@ -455,6 +455,7 @@
     </div>
 </div>
 
+@auth
 <!-- Modal (Formulario de Inscripción) -->
 <div id="modalForm" class="modal">
     <div class="modal-content">
@@ -462,7 +463,7 @@
         <form action="{{ route('store.taller') }}" method="POST">
             @csrf
             <div class="input-field">
-                <input type="text" id="nombre" name="nombre" value="{{Auth::user()->name}}">
+                <input type="text" id="nombre" name="nombre" value="{{ auth()->user()->name .' '. auth()->user()->app .' '. auth()->user()->apm }}">
                 <label for="nombre">Nombre Completo</label>
             </div>
             <div class="input-field">
@@ -497,4 +498,5 @@
 });
 
 </script>
+@endauth
 @endsection

@@ -31,7 +31,7 @@ class AlumnoTallerController extends Controller
             'user_id' => $user->id,
             'taller_id' => $request->taller_id,
             'constancia' => false,  // CAMBIAR VALORES
-            'estatus' => 'Inscrito',  // CAMBIAR VALORES
+            'estatus' => 'activo',  // CAMBIAR VALORES
         ]);
 
         // ESTE PRRO MENSAJE NO SALE, CHECARLO
