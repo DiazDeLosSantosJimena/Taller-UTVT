@@ -25,7 +25,7 @@ CREATE TABLE `alumno_tallers` (
   `user_id` bigint(20) unsigned NOT NULL,
   `taller_id` bigint(20) unsigned NOT NULL,
   `constancia` tinyint(1) NOT NULL,
-  `estatus` varchar(50) NOT NULL,
+  `estatus` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -33,13 +33,9 @@ CREATE TABLE `alumno_tallers` (
   KEY `alumno_tallers_taller_id_foreign` (`taller_id`),
   CONSTRAINT `alumno_tallers_taller_id_foreign` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`),
   CONSTRAINT `alumno_tallers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `alumno_tallers` */
-
-insert  into `alumno_tallers`(`id`,`user_id`,`taller_id`,`constancia`,`estatus`,`created_at`,`updated_at`) values 
-(1,3,1,0,'A','2025-01-29 15:24:36','2025-01-29 15:24:37'),
-(2,4,1,0,'A','2025-02-10 14:54:11','2025-02-10 14:54:18');
 
 /*Table structure for table `asistencia` */
 
@@ -57,14 +53,9 @@ CREATE TABLE `asistencia` (
   KEY `asistencia_periodo_id_foreign` (`periodo_id`),
   CONSTRAINT `asistencia_alumtalle_id_foreign` FOREIGN KEY (`alumtalle_id`) REFERENCES `alumno_tallers` (`id`),
   CONSTRAINT `asistencia_periodo_id_foreign` FOREIGN KEY (`periodo_id`) REFERENCES `periodos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `asistencia` */
-
-insert  into `asistencia`(`id`,`alumtalle_id`,`periodo_id`,`fecha`,`created_at`,`updated_at`) values 
-(1,1,1,'2025-01-31','2025-01-31 22:56:49','2025-01-31 22:56:49'),
-(2,1,1,'2025-02-10','2025-02-10 20:49:19','2025-02-10 20:49:19'),
-(3,2,1,'2025-02-07','2025-02-07 14:54:58','2025-02-07 14:55:04');
 
 /*Table structure for table `docente_tallers` */
 
@@ -86,7 +77,7 @@ CREATE TABLE `docente_tallers` (
 /*Data for the table `docente_tallers` */
 
 insert  into `docente_tallers`(`id`,`user_id`,`taller_id`,`created_at`,`updated_at`) values 
-(1,2,1,'2025-01-29 15:24:08','2025-01-29 15:24:11');
+(1,2,1,'2025-02-13 15:41:00','2025-02-13 15:41:02');
 
 /*Table structure for table `failed_jobs` */
 
@@ -115,7 +106,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
@@ -130,7 +121,8 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (8,'2025_01_18_040229_create_talleres_table',1),
 (9,'2025_01_18_040441_create_alumnotaller_table',1),
 (10,'2025_01_18_040456_create_docentetaller_table',1),
-(11,'2025_01_19_040515_create_asistencia_table',1);
+(11,'2025_01_19_040515_create_asistencia_table',1),
+(12,'2025_02_10_213502_create_porcentaje_view',1);
 
 /*Table structure for table `password_reset_tokens` */
 
@@ -161,7 +153,7 @@ CREATE TABLE `periodos` (
 /*Data for the table `periodos` */
 
 insert  into `periodos`(`id`,`fecha_inicio`,`fecha_fin`,`created_at`,`updated_at`) values 
-(1,'2025-01-06','2025-04-15','2025-01-29 20:58:25','2025-01-29 20:58:25');
+(1,'2025-01-06','2025-04-15','2025-02-13 20:31:22','2025-02-13 20:31:22');
 
 /*Table structure for table `personal_access_tokens` */
 
@@ -220,9 +212,9 @@ CREATE TABLE `roles` (
 /*Data for the table `roles` */
 
 insert  into `roles`(`id`,`name`,`created_at`,`updated_at`) values 
-(1,'Administrador','2025-01-29 01:15:37','2025-01-29 01:15:37'),
-(2,'Docente','2025-01-29 01:15:37','2025-01-29 01:15:37'),
-(3,'Alumno','2025-01-29 01:15:37','2025-01-29 01:15:37');
+(1,'Administrador','2025-02-13 20:29:00','2025-02-13 20:29:00'),
+(2,'Docente','2025-02-13 20:29:00','2025-02-13 20:29:00'),
+(3,'Alumno','2025-02-13 20:29:00','2025-02-13 20:29:00');
 
 /*Table structure for table `talleres` */
 
@@ -236,15 +228,14 @@ CREATE TABLE `talleres` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `talleres` */
 
 insert  into `talleres`(`id`,`nombre_taller`,`horarios`,`ubicacion`,`created_at`,`updated_at`) values 
-(1,'Futbol','Lunes, Martes y Viernes','Detras de cafetería','2025-01-29 15:22:42','2025-01-29 15:22:44'),
-(2,'Voleibol','Lunes, Martes, Miercoles y Viernes','Canchas detras de docencia.','2025-01-29 15:22:48','2025-01-29 15:22:46'),
-(3,'Basquetbol','Lunes, Martes y Viernes','Canchas detras de docencia','2025-01-29 15:23:41','2025-01-29 15:23:43'),
-(4,'Fotografía','Lunes, Miercoles y Viernes','Sala de eventos de rectoría','2025-02-06 06:16:38','2025-02-06 06:16:38');
+(1,'Voleibol','Lunes (8:00 - 17:00) | Martes, Miercoles y Viernes (16:00 - 19:00)','Canchas detras de docencia','2025-02-13 21:33:24','2025-02-13 21:37:17'),
+(2,'Basquetbol','Lunes (12:00 - 15:00 hrs) Miercoles (8:00 - 15:00 hrs) y Viernes (9:00 - 13:00 hrs)','Canchas detras de docencia','2025-02-13 21:34:50','2025-02-13 21:34:50'),
+(3,'Tocho Bandera','Lunes (9:00 - 12:00 hrs) y Viernes (13:00 - 16:00 hrs)','Cancha de futbol','2025-02-13 21:36:05','2025-02-13 21:36:05');
 
 /*Table structure for table `users` */
 
@@ -272,23 +263,14 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_rol_id_foreign` (`rol_id`),
   CONSTRAINT `users_rol_id_foreign` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`name`,`app`,`apm`,`email`,`email_verified_at`,`password`,`remember_token`,`carrera`,`matricula`,`nss`,`fecha_nac`,`sexo`,`genero`,`rol_id`,`created_at`,`updated_at`) values 
-(1,'Administrador','Sistemas','Talleres','admin@talleres.com',NULL,'$2y$12$UD.qgJZ88ljCwtD18SKIr.ChRxxUkctTGhF3IGW2b6WTi7zckBsTK',NULL,'Sistemas','000000000','49180365113','2001-01-01','F','NB',1,'2025-01-29 01:15:38','2025-01-29 01:15:38'),
-(2,'Docente','Taller','Voleibol','docente@talleres.com',NULL,'$2y$12$0YkF8E9G.oy5jPkOc.o3buRS7h0aG2G5UpLAgGKvV0AH7KGLuWkeO',NULL,'Mtro. Educación Motriz','000000000','49180365114','2001-01-01','F','NB',2,'2025-01-29 01:15:38','2025-01-29 01:15:38'),
-(3,'Alumno','-','UTVT','alumno@talleres.com',NULL,'$2y$12$nRntZDu1Vyuv0sc7o.Ow2OFvGYGuw9RwIbnGuYmkrttBFA6cFcAvq',NULL,'Ingenieria en Desarrollo y Gestión de Software','000000000','49180365115','2001-01-01','F','NB',3,'2025-01-29 01:15:38','2025-01-29 01:15:38'),
-(4,'Alumno 2','-','UTVT','alumno2@utvt.com',NULL,'$2y$12$wWPEg3/0m6P7P3NInrXIGeX/dSAMeiZmMorEahUsh.G/dAZWWlL6e',NULL,'T.S.U Mantenimiento, Área industrial','222222222','16874395214','2002-02-05','0','PE',3,'2025-02-05 23:15:58','2025-02-05 23:15:58'),
-(21,'Alumno 3','-','UTVT','alumno3@utvt.com',NULL,'$2y$12$CTb9A8csAblpw0opGu5Aeu7t9aR6vsleW3UXKcrJ8kpJgtKVsrZK2',NULL,'ING. Desarrollo y Gestión de Software','222100000','16800000000','2003-05-10','F','PE',3,'2025-02-10 23:53:14','2025-02-10 23:53:14'),
-(22,'Alumno 4','-','UTVT','alumno4@utvt.com',NULL,'$2y$12$qzvgKu/7.I60lDtqQsdb9OYxcAfiFifZpNHJdYfnlom4LmSOwvJiy',NULL,'ING. Desarrollo y Gestión de Software','222100001','16800000001','2003-05-11','M','PE',3,'2025-02-10 23:53:14','2025-02-10 23:53:14'),
-(23,'Alumno 5','-','UTVT','alumno5@utvt.com',NULL,'$2y$12$xVL1OBhTP8IuieIxmwh17uP9tNDGa5QtMZmtUBS9lv5R0wiqW52P6',NULL,'ING. Desarrollo y Gestión de Software','222100002','16800000002','2003-05-12','M','PE',3,'2025-02-10 23:53:14','2025-02-10 23:53:14'),
-(24,'Alumno 6','-','UTVT','alumno6@utvt.com',NULL,'$2y$12$CO/Kq3LvwT399vXR/mXdquE7zidAk7JMouqYfsdf6NE9xudIm9I92',NULL,'ING. Desarrollo y Gestión de Software','222100003','16800000003','2003-05-13','F','PE',3,'2025-02-10 23:53:15','2025-02-10 23:53:15'),
-(25,'Alumno 7','-','UTVT','alumno7@utvt.com',NULL,'$2y$12$TJBNDfwTEAtccaUeq6Yt2uJvNuM4kPV44FlAP1Pf9KTlHglRI08Rq',NULL,'ING. Desarrollo y Gestión de Software','222100004','16800000004','2003-05-14','M','PE',3,'2025-02-10 23:53:15','2025-02-10 23:53:15'),
-(26,'Alumno 8','-','UTVT','alumno8@utvt.com',NULL,'$2y$12$O9.aCAr7vT0ysZ9pPqppGuMmioY.dxwEMorzraWMHwPnSQTeqpSSS',NULL,'ING. Desarrollo y Gestión de Software','222100005','16800000005','2003-05-15','F','PE',3,'2025-02-10 23:53:15','2025-02-10 23:53:15'),
-(27,'Alumno 9','-','UTVT','alumno9@utvt.com',NULL,'$2y$12$F.Yn08ANaYwnu5g6zluIjexku.FGLx0dlsd04YerQnSO3BA2B6sYO',NULL,'ING. Desarrollo y Gestión de Software','222100006','16800000006','2003-05-16','M','PE',3,'2025-02-10 23:53:15','2025-02-10 23:53:15'),
-(28,'Alumno 10','-','UTVT','alumno10@utvt.com',NULL,'$2y$12$fyhHftcYKVKluWrIrUy9/OkwLNu3h0Gsup8VlU6sVVK00aBbJsLWi',NULL,'ING. Desarrollo y Gestión de Software','222100007','16800000007','2003-05-17','F','PE',3,'2025-02-10 23:53:15','2025-02-10 23:53:15');
+(1,'Administrador','Sistemas','Talleres','admin@talleres.com',NULL,'$2y$12$0WrOfkGd2r1gvoiYeYqkGOdgGTzdq/JVVmmhuFbL4q2yKXHvO8PpW',NULL,'Sistemas','000000000','49180365113','2001-01-01','F','NB',1,'2025-02-13 20:29:00','2025-02-13 20:29:00'),
+(2,'Docente','Taller','Voleibol','docente@talleres.com',NULL,'$2y$12$2F2Llh28VZF5GBAbM/HlceMKriNInPk/YKcHC801tOhFkJTzIfogi',NULL,'Mtro. Educación Motriz','000000000','49180365114','2001-01-01','F','NB',2,'2025-02-13 20:29:00','2025-02-13 20:29:00'),
+(3,'Alumno','-','UTVT','alumno@talleres.com',NULL,'$2y$12$TZmIbmFRJTU4sYQTTUeFROHrw2DX8E6SyxZaIr5mx2vAjSKIA18tC',NULL,'Ingenieria en Desarrollo y Gestión de Software','000000000','49180365115','2001-01-01','F','NB',3,'2025-02-13 20:29:01','2025-02-13 20:29:01');
 
 /*Table structure for table `asistencia_porcentaje` */
 
