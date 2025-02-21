@@ -181,22 +181,15 @@
     </div>
     <div class="row">
         <div class="carousel carousel-slider center">
-            <div class="carousel-item red white-text" href="#one!" style="background-image: url(); text-transform: uppercase;">
-                <h2>Primer Encuentro Regional Deportivo y Cultural</h2>
-                <p class="white-text">de Universidades del Subsistema Tecnológico</p>
+            <div class="carousel-item" href="#one!">
+                <h2>Banner Inicio</h2>
+                <p class="white-text">Descripción de banner inicio</p>
             </div>
-            <div class="carousel-item amber white-text" href="#two!">
-                <h2>Second Panel</h2>
-                <p class="white-text">This is your second panel</p>
-            </div>
-            <div class="carousel-item green white-text" href="#three!">
-                <h2>Third Panel</h2>
-                <p class="white-text">This is your third panel</p>
-            </div>
-            <div class="carousel-item blue white-text" href="#four!">
-                <h2>Fourth Panel</h2>
-                <p class="white-text">This is your fourth panel</p>
-            </div>
+            @foreach($eventos as $evento)
+                <div class="carousel-item" style="background-image: url({{ asset('img/imagenes/'.$evento->imagen) }}); text-transform: uppercase;">
+                    <h2>{{ $evento->titulo }}</h2>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AlumnoTallerController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AvisosController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\EventosController;
 use App\Http\Controllers\EventosPublicacionesController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TalleresController;
@@ -74,3 +76,12 @@ Route::post('/publicaciones', [EventosPublicacionesController::class, 'store'])-
 
 //AlumnosTalleres
 Route::post('/inscribirse-taller', [AlumnoTallerController::class, 'store'])->name('store.taller');
+
+//avisos 
+Route::resource('/avisos', AvisosController::class);
+Route::get('/avisos', [AvisosController::class, 'index'])->name('avisos.index');
+Route::post('/avisos', [AvisosController::class, 'store'])->name('avisos.store');
+
+//eventos
+Route::post('/eventos', [EventosController::class, 'store'])->name('eventos.store');
+    

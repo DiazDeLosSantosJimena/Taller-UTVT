@@ -85,8 +85,7 @@ CREATE TABLE `docente_tallers` (
 
 /*Data for the table `docente_tallers` */
 
-insert  into `docente_tallers`(`id`,`user_id`,`taller_id`,`created_at`,`updated_at`) values 
-(1,2,1,'2025-01-29 15:24:08','2025-01-29 15:24:11');
+ñ
 
 /*Table structure for table `failed_jobs` */
 

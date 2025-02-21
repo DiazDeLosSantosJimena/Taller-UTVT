@@ -20,7 +20,8 @@
             <!-- Navbar PC -->
             <ul class="right hide-on-med-and-down">
                 @auth
-                <li><a href="#">Avisos</a></li>
+                <li><a href="/avisos">Avisos</a></li>
+                <li><a href="#">Eventos</a></li>
                 <li><a href="@if(auth()->user()->rol_id === 2) /talleres-docente @elseif(auth()->user()->rol_id === 3) /talleres-alumno @endif ">Talleres</a></li>
                 <li><a href="/logout">Cerrar Sesión</a></li>
                 @endauth
@@ -31,7 +32,8 @@
             <!-- Navbar mobile -->
             <ul id="nav-mobile" class="sidenav">
                 @auth
-                <li><a href="#">Avisos</a></li>
+                <li><a href="/avisos">Avisos</a></li>
+                <li><a href="#">Eventos</a></li>
                 <li><a href="@if(auth()->user()->rol_id === 2) /talleres-docente @elseif(auth()->user()->rol_id === 3) /talleres-alumno @endif">Talleres</a></li>
                 <li><a href="/logout">Cerrar Sesión</a></li>
                 @endauth

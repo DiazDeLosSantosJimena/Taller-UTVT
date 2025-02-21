@@ -30,9 +30,9 @@ return [
 
     'disks' => [
 
-        'local' => [
+       'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => public_path('img/imagenes'),
             'throw' => false,
         ],
 
