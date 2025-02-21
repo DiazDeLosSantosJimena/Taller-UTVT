@@ -11,10 +11,15 @@ class AlumnoTallerController extends Controller
 {
     public function store(Request $request)
     {
-        
+        // dd($request->all());
+        $messages = [
+            'taller_id.required' => 'Es necesario colocar un nombre.',
+            'taller_id.exists' => 'Error en el registro.'
+        ];
+
         $request->validate([
-            'taller_id' => 'required|exists:talleres,id',
-        ]);
+                'taller_id' => ['required', 'exists:talleres,id']
+        ], $messages);
 
         
         $user = Auth::user();
@@ -33,6 +38,8 @@ class AlumnoTallerController extends Controller
             'constancia' => false,  // CAMBIAR VALORES
             'estatus' => 'activo',  // CAMBIAR VALORES
         ]);
+
+        $request->session()->put('taller', true);
 
         // ESTE PRRO MENSAJE NO SALE, CHECARLO
         return redirect()->back()->with('success', 'Te has inscrito correctamente al taller.');

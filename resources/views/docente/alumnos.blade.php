@@ -5,11 +5,6 @@
         <h2>{{ $taller->nombre_taller }}</h2>
         <p>Registro de los alumnos que están inscritos al taller.</p>
     </div>
-    @if(session('success'))
-    <div class="col s12 m12 center">
-        <span style="color: green;">{{ session('success') }}</span>
-    </div>
-    @endif
     <div class="col sm-12 md-12">
         <table class="responsive-table">
             <thead>
@@ -25,13 +20,31 @@
             </thead>
 
             <tbody>
-            @foreach($alumnos as $alumno)
+                @foreach($alumnos as $alumno)
                 <tr>
                     <td class="center">{{ $alumno->matricula }}</td>
                     <td>{{ $alumno->name .' '. $alumno->app .' '. $alumno->apm }}</td>
                     <td>{{ $alumno->email }}</td>
                     <td>{{ $alumno->carrera }}</td>
-                    <td class="center">{{ $alumno->genero }}</td>
+                    <td class="center">
+                        @if ($alumno->genero == 'H')
+                            Hombre
+                        @elseif($alumno->genero == 'M')
+                            Mujer
+                        @elseif($alumno->genero == 'NB')
+                            No Binario
+                        @elseif($alumno->genero == 'MT')
+                            Mujer Transgénero
+                        @elseif($alumno->genero == 'HT')
+                            Hombre Transgénero
+                        @elseif($alumno->genero == 'AG')
+                            Agénero
+                        @elseif($alumno->genero == 'NI')
+                            Identidad de género no incluida
+                        @elseif($alumno->genero == 'PE')
+                            Sin especificación
+                        @endif
+                    </td>
                     <td class="center" id="porcentaje{{ $alumno->id }}">0%</td>
                     <td class="center">
                         <a class="waves-effect waves-light btn white black-text disabled">Constancia</a>
@@ -45,16 +58,16 @@
 
 
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large blue" id="asistencia">
-    <i class="large material-icons">menu</i>
-  </a>
-  <ul>
-    <li><a class="btn-floating red" href="#eventos"><i class="material-icons">art_track</i></a></li>
-    <li><a class="btn-floating blue" href="#avisos"><i class="material-icons">message</i></a></li>
-    <li><a class="btn-floating green" href="{{ route('asistencia', ['id' => $taller->id]) }}"><i class="material-icons">assignment_turned_in</i></a></li>
-  </ul>
+    <a class="btn-floating btn-large blue" id="asistencia">
+        <i class="large material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a class="btn-floating red" href="#eventos"><i class="material-icons">art_track</i></a></li>
+        <li><a class="btn-floating blue" href="#avisos"><i class="material-icons">message</i></a></li>
+        <li><a class="btn-floating green" href="{{ route('asistencia', ['id' => $taller->id]) }}"><i class="material-icons">assignment_turned_in</i></a></li>
+    </ul>
 </div>
-      
+
 
 <!-- Tap Target Structure -->
 <div class="tap-target cyan" data-target="asistencia">
@@ -69,13 +82,20 @@
 <script>
     let porcentajes = @json($porcentajes) // Convertimos JSON de PHP a JS
 
-    porcentajes.forEach( porcentaje => {
+    porcentajes.forEach(porcentaje => {
         rowID = `porcentaje${porcentaje.user_id}`
         rowDom = document.getElementById(rowID);
 
-        rowDom.textContent = parseInt(porcentaje.porcentaje_asistencia)+'%'
+        console.log(porcentaje)
+
+        porcentaje.porcentaje_asistencia === null ? rowDom.textContent = '0%' : rowDom.textContent = parseInt(porcentaje.porcentaje_asistencia) + '%'
     })
 </script>
+@if(session('success'))
+<script>
+    M.toast({html: "{{ session('success') }}", classes: 'green darken-3'})
+</script>
+@endif
 @endsection
 
 @endsection

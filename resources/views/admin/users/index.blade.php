@@ -35,46 +35,36 @@
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th>#</th>
                         <th>Nombre</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
                         <th>Cargo</th>
                         <th>Sexo</th>
                         <th>Genero</th>
                         <th>Carrera</th>
                         <th>Matricula</th>
                         <th>NSS</th>
-                        <th>E-mail</th>
-                        <th class="text-center">Acción</th>
-                        <th class="text-center">Acción</th>
+                        <th colspan="2">Acción</th>
                     </tr>
                 </thead>
                 <tfoot>
-                    <tr>
+                    <tr class="text-center">
                         <th>#</th>
                         <th>Nombre</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
                         <th>Cargo</th>
                         <th>Sexo</th>
                         <th>Genero</th>
                         <th>Carrera</th>
                         <th>Matricula</th>
                         <th>NSS</th>
-                        <th>E-mail</th>
-                        <th class="text-center">Acción</th>
-                        <th class="text-center">Acción</th>
+                        <th colspan="2">Acción</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @foreach ($usuarios as $user)
                     <tr class="text-center">
                         <td class="text-center">{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->app }}</td>
-                        <td>{{ $user->apm }}</td>
+                        <td>{{ $user->name .' '. $user->app .' '. $user->apm }}</td>
                         <td>
                             @if ($user->rol_id == 1)
                             Administrador
@@ -115,7 +105,6 @@
                         <td>{{ $user->carrera !== null ? $user->carrera : 'Sin dato' }}</td>
                         <td>{{ $user->matricula !== null ? $user->matricula : 'Sin dato' }}</td>
                         <td>{{ $user->nss !== null ? $user->nss : 'Sin dato' }}</td>
-                        <td>{{ $user->email !== null ? $user->email : 'Sin dato' }}</td>
                         <td>
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $user->id }}">
                                 Editar

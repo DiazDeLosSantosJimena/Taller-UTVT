@@ -34,16 +34,3 @@ document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.tap-target');
   var instances = M.TapTarget.init(elems);
 });
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Selecciona el elemento del tap target
-  const tapTarget = document.querySelector('.tap-target');
-  // Inicializa el componente
-  const instance = M.TapTarget.init(tapTarget);
-
-  // Activa el tap target automáticamente
-  instance.open();
-
-  // Opcional: cierra automáticamente después de unos segundos
-  setTimeout(() => instance.close(), 3000);
-});

@@ -11,6 +11,7 @@ $fecha_actual = date("Y-m-d");
     <div class="col-12">
         <h1>Registro de Periodo</h1>
         <p>En esté apartado se establecera el periodo con el que se harán los registos de las asistencias para los talleres.</p>
+        <div class="form-text" id="basic-addon4">Nota: Una vez establecido el periodo esté no se podrá cambiar hasta pasada la <strong>fecha de fin del periodo</strong> registrado.</div>
     </div>
     <div class="col-6 pt-5 text-center">
         <form action="{{ route('agregar_periodo') }}" method="post" enctype="multipart/form-data">

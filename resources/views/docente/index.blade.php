@@ -14,11 +14,6 @@ $session_taller = session('taller')
   <div class="col-12 center">
     <h2>Talleres</h2>
     <p>Talleres que imparto actualmente.</p>
-
-    <!-- Boton para crear un evento -->
-    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearEventoModal">
-      Crear Evento
-    </button>
   </div>
 
   @foreach($talleres as $taller)
@@ -35,7 +30,6 @@ $session_taller = session('taller')
   </div>
   @endforeach
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="crearEventoModal" tabindex="-1" aria-labelledby="crearEventoModalLabel" aria-hidden="true">
@@ -77,7 +71,6 @@ $session_taller = session('taller')
     </div>
   </div>
 </div>
-
 
 @section('js')
 <script>

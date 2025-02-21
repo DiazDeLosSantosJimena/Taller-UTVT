@@ -70,7 +70,7 @@
 														<tr>
 															<td class="pad" style="width:100%;">
 																<div class="alignment" align="center" style="line-height:10px">
-																	<div style="max-width: 225px;"><img src="{{ asset('img/gobEstadoMexico.png') }}" style="display: block; height: auto; border: 0; width: 100%;" alt title height="auto"></div>
+																	<div style="max-width: 225px;"><img src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img\pdf\gobEstadoMexico.png'))) }}" style="display: block; height: auto; border: 0; width: 100%;" alt title height="auto"></div>
 																</div>
 															</td>
 														</tr>
@@ -81,7 +81,7 @@
 														<tr>
 															<td class="pad" style="width:100%;">
 																<div class="alignment" align="center" style="line-height:10px">
-																	<div style="max-width: 225px;"><img src="{{ asset('img/educacion.png') }}" style="display: block; height: auto; border: 0; width: 100%;" alt title height="auto"></div>
+																	<div style="max-width: 225px;"><img src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img\pdf\educacion.png'))) }}" style="display: block; height: auto; border: 0; width: 100%;" alt title height="auto"></div>
 																</div>
 															</td>
 														</tr>
@@ -92,7 +92,7 @@
 														<tr>
 															<td class="pad" style="width:100%;">
 																<div class="alignment" align="center" style="line-height:10px">
-																	<div style="max-width: 225px;"><img src="{{ asset('img/logotipoutvt.png') }}" style="display: block; height: auto; border: 0; width: 100%;" alt title height="auto"></div>
+																	<div style="max-width: 225px;"><img src="data:image/png;base64,{{base64_encode(file_get_contents(public_path('img\pdf\logotipoutvt.png'))) }}" style="display: block; height: auto; border: 0; width: 100%;" alt title height="auto"></div>
 																</div>
 															</td>
 														</tr>
@@ -239,7 +239,7 @@
 														<tr>
 															<td class="pad" style="width:100%;">
 																<div class="alignment" align="center" style="line-height:10px">
-																	<div style="max-width: 226px;"><img src="{{ asset('img/CodigoQR.jpg') }}" style="display: block; height: auto; border: 0; width: 100%;" alt title height="auto"></div>
+																	<div style="max-width: 200px;"><img src="data:image/jpg;base64,{{base64_encode(file_get_contents(public_path('img\pdf\CodigoQR.jpg'))) }}" style="display: block; height: auto; border: 0; width: 100%;" alt title height="auto"></div>
 																</div>
 															</td>
 														</tr>

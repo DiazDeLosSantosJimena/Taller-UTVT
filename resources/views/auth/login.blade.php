@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <title>Iniciar Sesión</title>
@@ -10,7 +11,13 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/login/sb-admin-2.min.css') }}" rel="stylesheet">
-
+    <style>
+        .bg-login-image {
+            background: url("{{ asset('img/TalleresUTVT.jpg') }}");
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="bg-gradient-success">
@@ -43,11 +50,14 @@
                                             <input type="password" class="form-control form-control-user"
                                                 id="password" name="password" placeholder="Ingrese su contraseña">
                                         </div>
+                                        <div class="text-center pb-3">
+                                            <a class="small" href="forgot-password.html">Contraseña Olvidada...</a>
+                                        </div>
                                         <input type="submit" value="Ingresar" class="btn btn-success btn-user btn-block" />
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Contraseña Olvidada...</a>
+                                    <div class="text-right">
+                                        <a class="small" href="/">Volver</a>
                                     </div>
                                 </div>
                             </div>

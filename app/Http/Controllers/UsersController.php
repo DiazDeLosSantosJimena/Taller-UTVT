@@ -21,17 +21,18 @@ class UsersController extends Controller
 
     public function viewAlumno()
     {
-        $talleres = Talleres::select('talleres.id', 'nombre_taller', 'horarios')
+        $talleres = Talleres::select('talleres.id', 'nombre_taller', 'horarios', 'alumno_tallers.constancia')
             ->join('alumno_tallers', 'alumno_tallers.taller_id', 'talleres.id')
             ->where('alumno_tallers.user_id', '=', Auth()->user()->id)
-            ->get();
+            ->where('alumno_tallers.estatus', '=', 'activo')
+        ->get();
         
         $periodos = AlumnoTaller::select('alumno_tallers.id', 'constancia', 'p.fecha_inicio', 'p.fecha_fin', 't.nombre_taller')
-        ->join('talleres as t', 't.id', 'alumno_tallers.taller_id')
-        ->join('asistencia as a', 'a.alumtalle_id', 'alumno_tallers.id')
-        ->join('periodos as p', 'p.id', 'a.periodo_id')
-        ->where('alumno_tallers.user_id', '=', Auth()->user()->id)
-        ->distinct()
+            ->join('talleres as t', 't.id', 'alumno_tallers.taller_id')
+            ->join('asistencia as a', 'a.alumtalle_id', 'alumno_tallers.id')
+            ->join('periodos as p', 'p.id', 'a.periodo_id')
+            ->where('alumno_tallers.user_id', '=', Auth()->user()->id)
+            ->distinct()
         ->get();
 
 

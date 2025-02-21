@@ -24,7 +24,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" data-bs-toggle="collapse" href="#collapseRegistros" role="button" aria-expanded="false" aria-controls="collapseExample">Registros <i class="bi bi-arrow-down-short"></i></a>
                     <div class="collapse" id="collapseRegistros">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('users.show') }}">  - Usuarios</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="taller">  - Talleres</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('taller.index') }}">  - Talleres</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/tallerdocen">  - Docentes Talleres</a>
                 </div>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Publicaciones</a>

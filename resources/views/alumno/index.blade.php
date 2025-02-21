@@ -19,14 +19,16 @@ $session_taller = session('taller')
             <span>Taller al que estoy inscrito actualmente.</span>
         </div>
         @foreach($talleres as $taller)
-        <div class="col s12 m12">
+        <div class="col s12 m6">
             <div class="container-custom pt-3">
                 <div class="card center">
                     <div class="card-details">
                         <p class="text-title">{{ $taller->nombre_taller }}</p>
                         <p class="text-body">{{ $taller->horarios }}</p>
                     </div>
-                    <a href="{{ route('alumnos-taller', ['id' => $taller->id ]) }}" class="card-button">Más información</a>
+                    @if($taller->constancia != 0)
+                        <a href="{{ route('alumnos-taller', ['id' => $taller->id ]) }}" class="card-button">Constancia</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -36,7 +38,7 @@ $session_taller = session('taller')
 
 @else
 <div class="row">
-    <h3 class="center">No estás inscrito a ningun taller. Dirigete a: <a href="/inicio#talleres">Inicio</a> para conocer los talleres e inscribirte a uno.</h3>
+    <h3 class="center">No estás inscrito a ningun taller. 😅<br>Dirigete a la sección: <a href="/inicio#talleres">Talleres</a> para conocer los talleres e inscribirte a uno.<br>💪</h3>
 </div>
 @endif
 

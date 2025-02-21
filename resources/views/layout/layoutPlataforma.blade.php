@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>UTVT - Talleres Deportivos y Culturales</title>
 
+    <link rel="shortcut icon" href="{{ asset('img/cuervo.svg') }}" type="image/svg+xml">
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -31,12 +32,12 @@
             <!-- Navbar mobile -->
             <ul id="nav-mobile" class="sidenav">
                 @auth
-                <li><a href="#">Avisos</a></li>
-                <li><a href="@if(auth()->user()->rol_id === 2) /talleres-docente @elseif(auth()->user()->rol_id === 3) /talleres-alumno @endif">Talleres</a></li>
-                <li><a href="/logout">Cerrar Sesión</a></li>
+                <li><a href="#">💬 Avisos</a></li>
+                <li><a href="@if(auth()->user()->rol_id === 2) /talleres-docente @elseif(auth()->user()->rol_id === 3) /talleres-alumno @endif">🚩 Talleres</a></li>
+                <li><a href="/logout">⤴️ Cerrar Sesión</a></li>
                 @endauth
                 @guest
-                <li><a href="/login">Iniciar Sesión</a></li>
+                <li><a href="/login">⤵️ Iniciar Sesión</a></li>
                 @endguest
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
