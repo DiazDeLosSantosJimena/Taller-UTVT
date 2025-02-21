@@ -18,22 +18,22 @@ $session_taller = session('taller')
             <h2>Talleres</h2>
             <span>Taller al que estoy inscrito actualmente.</span>
         </div>
-        @foreach($talleres as $taller)
-        <div class="col s12 m6">
-            <div class="container-custom pt-3">
-                <div class="card center">
-                    <div class="card-details">
-                        <p class="text-title">{{ $taller->nombre_taller }}</p>
-                        <p class="text-body">{{ $taller->horarios }}</p>
-                    </div>
-                    @if($taller->constancia != 0)
-                        <a href="{{ route('alumnos-taller', ['id' => $taller->id ]) }}" class="card-button">Constancia</a>
-                    @endif
-                </div>
-            </div>
-        </div>
-        @endforeach
     </div>
+</div>
+<div class="row container-custom">
+    @foreach($talleres as $taller)
+    <div class="col">
+        <div class="card center">
+            <div class="card-details">
+                <p class="text-title">{{ $taller->nombre_taller }}</p>
+                <p class="text-body">{{ $taller->horarios }}</p>
+            </div>
+            @if($taller->constancia != 0)
+            <a href="{{ route('alumnos-taller', ['id' => $taller->id ]) }}" class="card-button">Constancia</a>
+            @endif
+        </div>
+    </div>
+    @endforeach
 </div>
 
 @else
@@ -63,10 +63,10 @@ $session_taller = session('taller')
                     <td>{{ $periodo->nombre_taller }}</td>
                     <td>{{ \Carbon\Carbon::parse($periodo->fecha_inicio)->translatedFormat('F') .' - '. \Carbon\Carbon::parse($periodo->fecha_fin)->translatedFormat('F') }}</td>
                     <td>
-                        @if($periodo->constancia === 0) 
-                            <p class="red-text">Constancia no concedida.</p> 
-                        @else  
-                            <a class="waves-effect waves-light btn" href="/constancia">Obtener</a>
+                        @if($periodo->constancia === 0)
+                        <p class="red-text">Constancia no concedida.</p>
+                        @else
+                        <a class="waves-effect waves-light btn" href="/constancia">Obtener</a>
                         @endif
                     </td>
                 </tr>

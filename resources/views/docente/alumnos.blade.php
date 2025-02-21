@@ -62,12 +62,13 @@
         <i class="large material-icons">menu</i>
     </a>
     <ul>
-        <li><a class="btn-floating red" href="#eventos"><i class="material-icons">art_track</i></a></li>
-        <li><a class="btn-floating blue" href="#avisos"><i class="material-icons">message</i></a></li>
+        <li><a class="btn-floating red modal-trigger" href="#modal-evento"><i class="material-icons">art_track</i></a></li>
+        <li><a class="btn-floating blue modal-trigger" href="#modal-aviso"><i class="material-icons">message</i></a></li>
         <li><a class="btn-floating green" href="{{ route('asistencia', ['id' => $taller->id]) }}"><i class="material-icons">assignment_turned_in</i></a></li>
     </ul>
 </div>
 
+@include('docente.modales')
 
 <!-- Tap Target Structure -->
 <div class="tap-target cyan" data-target="asistencia">
@@ -94,6 +95,18 @@
 @if(session('success'))
 <script>
     M.toast({html: "{{ session('success') }}", classes: 'green darken-3'})
+</script>
+@endif
+@if(session('eventSuccess'))
+<script>
+    var toastHTML = `<span>{{ session('eventSuccess') }}</span><a href="/inicio#eventos" class="btn-flat toast-action">Ir...</a>`;
+    M.toast({html: toastHTML, classes: 'green darken-3'})
+</script>
+@endif
+@if(session('avisoSuccess'))
+<script>
+    var toastHTML = `<span>{{ session('avisoSuccess') }}</span><a href="/avisos" class="btn-flat toast-action">Ir...</a>`;
+    M.toast({html: toastHTML, classes: 'green darken-3'})
 </script>
 @endif
 @endsection

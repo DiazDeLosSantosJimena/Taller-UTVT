@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('publicaciones', function (Blueprint $table) {
+        Schema::create('avisos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained('users');
-            $table->string('titulo')->nullable();
-            $table->string('descripcion')->nullable();
-            $table->string('tipo')->nullable();
+            $table->foreignId('taller_id')->constrained('talleres');
+            $table->string('titulo');
+            $table->string('descripcion');
             $table->text('imagen', 255)->nullable();
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('publicaciones');
+        Schema::dropIfExists('avisos');
     }
 };

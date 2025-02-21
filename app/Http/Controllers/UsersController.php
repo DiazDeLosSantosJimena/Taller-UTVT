@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\UsersImport;
 use App\Models\AlumnoTaller;
+use App\Models\Eventos;
 use App\Models\Roles;
 use App\Models\Talleres;
 use App\Models\User;
@@ -16,7 +17,8 @@ class UsersController extends Controller
     public function index()
     {
         $talleres =Talleres::all();
-        return view('welcome', compact('talleres'));
+        $eventos =Eventos::all();
+        return view('welcome', compact('talleres' , 'eventos'));
     }
 
     public function viewAlumno()
@@ -35,8 +37,9 @@ class UsersController extends Controller
             ->distinct()
         ->get();
 
+        $eventos =Eventos::all();
 
-        return view('alumno.index', compact('talleres','periodos'));
+        return view('alumno.index', compact('talleres','periodos' , 'eventos'));
     }
 
     public function show()
