@@ -1,5 +1,4 @@
 @extends('layout.layoutAdmin')
-
 @section('content')
     <div class="row">
         <!-- Page Heading -->
@@ -75,7 +74,11 @@
         </div>
     </div>
     <!-- END TABLE ADMI -->
+    
 @endsection
+
 @section('modals')
     @include('admin.talleres.modales')
 @endsection
+
+

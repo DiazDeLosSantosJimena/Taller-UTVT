@@ -1,4 +1,7 @@
 @extends('layout.layoutAdmin')
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/virtual-select.min.css') }}">
+@endsection
 
 @section('content')
     <div class="row">
@@ -33,7 +36,6 @@
                             <th>Nombre del docente</th>
                             <th>Nombre del taller</th>
                             <th class="text-center">Acción</th>
-                            <th class="text-center">Acción</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -41,7 +43,6 @@
                             <th>#</th>
                             <th>Nombre del docente</th>
                             <th>Nombre del taller</th>
-                            <th class="text-center">Acción</th>
                             <th class="text-center">Acción</th>
                         </tr>
                     </tfoot>
@@ -51,12 +52,6 @@
                                 <td class="text-center">{{ $talled->talleres_users_id }}</td>
                                 <td>{{ $talled->name }} {{ $talled->app }} {{ $talled->apm }}</td>
                                 <td>{{ $talled->nombre_taller }}</td>
-                                <td>
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#">
-                                        Editar
-                                    </button>
-                                </td>
                                 <td>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#deleteModal{{ $talled->talleres_users_id }}">
@@ -72,6 +67,14 @@
         </div>
     </div>
     <!-- END TABLE ADMI -->
+@endsection
+@section('js')
+<script type="text/javascript" src="{{ asset('js/admin/virtual-select.min.js') }}"></script>
+    <script type="text/javascript">
+        VirtualSelect.init({
+            ele: '#tall'
+        });
+    </script>
 @endsection
 @section('modals')
     @include('admin.talleresusers.modales')

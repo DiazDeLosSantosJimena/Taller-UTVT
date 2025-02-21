@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Talleres;
@@ -26,13 +27,13 @@ class DocentesTallerController extends Controller
             )
             ->get();
         //Consulta de select
-        $userD = User::where('rol_id', 2)->whereNotIn('id', function ($query) {
-            $query->select('user_id')->from('docente_tallers');})->get();
+        $userD = User::where('rol_id', 2)->get();
 
         $tallers = Talleres::whereNotIn('id', function ($query) {
-            $query->select('taller_id')->from('docente_tallers'); })->get();
-     
-        return view('admin.talleresusers.index',compact('talleresdocen','userD','tallers',));
+            $query->select('taller_id')->from('docente_tallers');
+        })->get();
+
+        return view('admin.talleresusers.index', compact('talleresdocen', 'userD', 'tallers',));
     }
     public function create()
     {
@@ -51,12 +52,18 @@ class DocentesTallerController extends Controller
 
         ], $messages);
 
-        $tallerD = new DocenteTaller([
-            'user_id' => $request->input('user_id'),
-            'taller_id' => $request->input('taller_id'),
-        ]);
+        $user_id = $request->user_id;
+        $talleres = $request->taller_id[0];
+        $separador = ',';
+        $ids = explode($separador, $talleres);
+        $contador = count($ids);
 
-        $tallerD->save();
+        for ($i = 0; $i < $contador; $i++) {
+            DocenteTaller::create(array(
+                'user_id' => $user_id,
+                'taller_id' => $ids[$i]
+            ));
+        }
         return redirect()->route('tallerdocen.index')->with('success', 'Docente asignado a un taller exitosamente');
     }
 

@@ -11,8 +11,8 @@
                     <form action="{{ route('tallerdocen.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="floatingInput">Selecciona un taller:</label>
-                            <select class="form-select" aria-label="Default select example" name="taller_id">
+                            <label for="floatingInput">Selecciona uno o varios talleres:</label>
+                            <select multiple data-search="true" data-silent-initial-value-set="true" id="tall" name="taller_id[]">
                                 @foreach ($tallers as $info)
                                     <option value="{{ $info->id }}">{{ $info->nombre_taller }}</option>
                                 @endforeach
