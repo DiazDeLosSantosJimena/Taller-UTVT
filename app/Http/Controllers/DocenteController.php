@@ -22,11 +22,11 @@ class DocenteController extends Controller
             return view('docente.index');
         } else {
             if (Auth()->user()->rol_id === 2) {
-                $talleres = Talleres::select('talleres.id', 'nombre_taller', 'horarios')
+                $talleres = Talleres::select('talleres.id', 'nombre_taller', 'tipo')
                     ->join('docente_tallers', 'docente_tallers.taller_id', 'talleres.id')
                     ->where('docente_tallers.user_id', '=', Auth()->user()->id)->get();
             } else if (Auth()->user()->rol_id === 3) {
-                $talleres = Talleres::select('talleres.id', 'nombre_taller', 'horarios')
+                $talleres = Talleres::select('talleres.id', 'nombre_taller', 'tipo')
                     ->join('alumno_tallers', 'alumno_tallers.taller_id', 'talleres.id')
                     ->where('alumno_tallers.user_id', '=', Auth()->user()->id)->get();
             }
@@ -39,15 +39,19 @@ class DocenteController extends Controller
     {
         //  Periodo actual en el sistema
         $periodo = Periodo::latest()->first();
-        $fecha_inicio = $periodo->fecha_inicio;
-        $fecha_fin = $periodo->fecha_fin;
+
+        if($periodo == null){
+            return view('docente.alumnos', [
+                'periodo' => $periodo
+            ]);
+        }
 
         // Total de asistencias
         // Filtrar por taller_id si se proporciona
-        $porcentajes = DB::table('asistencia_porcentaje')
-            ->join('alumno_tallers', 'asistencia_porcentaje.user_id', '=', 'alumno_tallers.user_id')
-            ->where('alumno_tallers.taller_id', $id)
-            ->select('asistencia_porcentaje.*')
+        $porcentajes = AsistenciaPorcentaje::select('asistencia_porcentaje.*', 'alumno_tallers.taller_id')
+            ->join('alumno_tallers', 'alumno_tallers.user_id', '=', 'asistencia_porcentaje.user_id')
+            ->whereNotNull('porcentaje_asistencia')
+            ->where('alumno_tallers.taller_id', 3)
             ->get();
 
         // dd($porcentajes);
@@ -62,18 +66,32 @@ class DocenteController extends Controller
         return view('docente.alumnos', [
             'alumnos' => $alumnos,
             'taller' => $taller,
-            'porcentajes' => $porcentajes
+            'porcentajes' => $porcentajes,
+            'periodo' => $periodo
         ]);
     }
 
     public function asistenciaView($id)
     {
         $taller = Talleres::find($id);
-        $alumnos = User::select('users.id', 'name', 'app', 'apm', 'email', 'carrera', 'matricula', 'genero')
-            ->join('alumno_tallers', 'alumno_tallers.user_id', 'users.id')
-            ->join('talleres', 'talleres.id', 'alumno_tallers.taller_id')
-            ->where('talleres.id', '=', $id)
-            ->get();
+        
+        // $alumnos = User::select('users.id', 'name', 'app', 'apm', 'email', 'carrera', 'matricula', 'genero')
+        //     ->join('alumno_tallers', 'alumno_tallers.user_id', 'users.id')
+        //     ->join('talleres', 'talleres.id', 'alumno_tallers.taller_id')
+        //     ->where('talleres.id', '=', $id)
+        //     ->get();
+
+        $alumnos = \DB::select('WITH asistencia_semanal AS (
+            SELECT DISTINCT alumtalle_id
+            FROM asistencia
+            WHERE YEARWEEK(fecha, 1) = YEARWEEK(CURDATE(), 1)
+        )
+        SELECT users.id, users.name, users.app, users.apm, at.taller_id
+        FROM alumno_tallers AT
+        JOIN users ON at.user_id = users.id 
+        LEFT JOIN asistencia_semanal a ON at.id = a.alumtalle_id
+        WHERE a.alumtalle_id IS NULL AND at.taller_id = 3 AND at.estatus = "activo"');
+
         return view('docente.asistencia', compact('alumnos', 'taller'));
     }
 
@@ -96,7 +114,7 @@ class DocenteController extends Controller
 
             Asistencia::create(array(
                 'alumtalle_id' => $alumtalle_id[0]->id,
-                'fecha' => date('y-m-d'),
+                'fecha' => Carbon::now(),
                 'periodo_id' => $periodo->id
             ));
         }

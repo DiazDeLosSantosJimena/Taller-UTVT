@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('talleres', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre_taller');
-            $table->string('horarios');
-            $table->string('ubicacion');
+            $table->text('descripcion');
+            $table->text('horarios_img');
+            $table->text('imagen');
+            $table->string('tipo');
+            $table->string('estatus');
             $table->timestamps();
         });
     }

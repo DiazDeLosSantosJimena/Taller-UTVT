@@ -177,10 +177,10 @@
                                         Negocios, Área Mercadotecnica.</option>
                                     <option value="ING. Mantenimiento Industrial.">ING. Mantenimiento Industrial.
                                     </option>
-                                    <option value="ING. Mecatrónica">ING. Mecatrónica.</option>
+                                    <option value="ING. Mecatrónica.">ING. Mecatrónica.</option>
                                     <option value="ING. Desarrollo y Gestión de Software.">ING. Desarrollo y Gestión de
                                         Software.</option>
-                                    <option value="ING. Redes Inteligentes y Ciberseguridad">ING. Redes Inteligentes y
+                                    <option value="ING. Redes Inteligentes y Ciberseguridad.">ING. Redes Inteligentes y
                                         Ciberseguridad.</option>
                                     <option value="ING. Sistemas Productivos.">ING. Sistemas Productivos.</option>
                                     <option value="ING. Tecnología Ambiental.">ING. Tecnología Ambiental.</option>
@@ -188,7 +188,7 @@
                                         Emergencias.</option>
                                     <option value="LIC. Innovación de Negocios y Mercadotecnica.">LIC. Innovación de
                                         Negocios y Mercadotecnica.</option>
-                                    <option value="LIC. Enfermería">LIC. Enfermería</option>
+                                    <option value="LIC. Enfermería.">LIC. Enfermería</option>
                                 </select>
                                 @error('carrera')
                                 <small class="form-text text-danger">{{ $message }}</small>

@@ -10,8 +10,11 @@ class Talleres extends Model
     use HasFactory;
     protected $fillable = [
         'nombre_taller',
-        'horarios',
-        'ubicacion'
+        'descripcion',
+        'horarios_img',
+        'imagen',
+        'tipo',
+        'estatus'
     ];
 
     public function AlumnoTaller() {

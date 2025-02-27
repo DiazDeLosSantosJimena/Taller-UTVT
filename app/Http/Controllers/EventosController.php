@@ -26,38 +26,35 @@ class EventosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        {
-            // Validación de los datos recibidos
-            $request->validate([
-                'titulo' => 'required|string|max:255',
-                'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-        
-            // Guardar la imagen si se ha subido
-            if ($request->file('imagen')  !=  '') {
-                $file = $request->file('imagen');
-                $foto1 = $file->getClientOriginalName();
-                $dates = date('YmdHis');
-                $foto2 = $dates . $foto1;
-                \Storage::disk('local')->put($foto2, \File::get($file));
-            } else {
-                $foto2 = 'eventos.png';
-            }
-        
-            // Crear el evento
-            Eventos::create([
-                'user_id' => Auth()->user()->id,  
-                'titulo' => $request->titulo,    
-                'imagen' => $foto2,         
-            ]);
-        
-            // Redirigir a la lista de eventos o cualquier otra página con un mensaje de éxito
-            return redirect()->route('alumnos-taller', ['id' => $id])->with('eventSuccess', 'Evento creado correctamente!');
-        }
-    }
+        // Validación de los datos recibidos
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
+        // Guardar la imagen si se ha subido
+        if ($request->file('imagen')  !=  '') {
+            $file = $request->file('imagen');
+            $foto1 = $file->getClientOriginalName();
+            $dates = date('YmdHis');
+            $foto2 = $dates . $foto1;
+            \Storage::disk('imagenes')->put($foto2, \File::get($file));
+        } else {
+            $foto2 = 'eventos.png';
+        }
+
+        // Crear el evento
+        Eventos::create([
+            'user_id' => Auth()->user()->id,
+            'titulo' => $request->titulo,
+            'imagen' => $foto2,
+        ]);
+
+        // Redirigir a la lista de eventos o cualquier otra página con un mensaje de éxito
+        return redirect('/')->with('success', 'Evento creado correctamente.');
+    }
     /**
      * Display the specified resource.
      */

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('taller_id')->constrained('talleres');
             $table->string('titulo');
-            $table->string('descripcion');
-            $table->text('imagen', 255)->nullable();
+            $table->text('descripcion');
+            $table->text('imagen')->nullable();
             $table->timestamps();
         });
     }

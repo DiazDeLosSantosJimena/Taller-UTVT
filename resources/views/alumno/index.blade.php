@@ -25,8 +25,8 @@ $session_taller = session('taller')
     <div class="col">
         <div class="card center">
             <div class="card-details">
-                <p class="text-title">{{ $taller->nombre_taller }}</p>
-                <p class="text-body">{{ $taller->horarios }}</p>
+                <p class="text-title">{{ $taller->nombre_taller }}<br>🏀</p>
+                <p class="text-body">{{ $taller->tipo }}</p>
             </div>
             @if($taller->constancia != 0)
             <a href="{{ route('alumnos-taller', ['id' => $taller->id ]) }}" class="card-button">Constancia</a>
@@ -61,7 +61,13 @@ $session_taller = session('taller')
                 @foreach($periodos as $periodo)
                 <tr>
                     <td>{{ $periodo->nombre_taller }}</td>
-                    <td>{{ \Carbon\Carbon::parse($periodo->fecha_inicio)->translatedFormat('F') .' - '. \Carbon\Carbon::parse($periodo->fecha_fin)->translatedFormat('F') }}</td>
+                    <td>
+                        @if($periodo->periodo_id != null)
+                        {{ \Carbon\Carbon::parse($periodo->fecha_inicio)->translatedFormat('F') .' - '. \Carbon\Carbon::parse($periodo->fecha_fin)->translatedFormat('F') }}
+                        @else
+                        No hay registro de asistencia.
+                        @endif
+                    </td>
                     <td>
                         @if($periodo->constancia === 0)
                         <p class="red-text">Constancia no concedida.</p>

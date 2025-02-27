@@ -32,7 +32,7 @@ Route::get('/', function () {
                 return redirect('admin');
                 break;
             case 2:
-                return redirect('/inicio');
+                return redirect('/talleres-docente');
                 break;
             case 3:
                 return redirect('/inicio');
@@ -86,5 +86,5 @@ Route::get('/avisos', [AvisosController::class, 'index'])->name('avisos.index');
 Route::post('/avisos/{id}', [AvisosController::class, 'store'])->name('avisos.store');
 
 //eventos
-Route::post('/eventos/{id}', [EventosController::class, 'store'])->name('eventos.store');
+Route::post('/eventos', [EventosController::class, 'store'])->name('eventos.store');
     

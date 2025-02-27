@@ -31,20 +31,20 @@
                         <tr>
                             <th>#</th>
                             <th>Nombre del taller</th>
-                            <th>Horarios</th>
-                            <th>Ubicación</th>
-                            <th class="text-center">Acción</th>
-                            <th class="text-center">Acción</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th>Estatus</th>
+                            <th colspan="2" class="text-center">Acción</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>#</th>
                             <th>Nombre del taller</th>
-                            <th>Horarios</th>
-                            <th>Ubicación</th>
-                            <th class="text-center">Acción</th>
-                            <th class="text-center">Acción</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th>Estatus</th>
+                            <th colspan="2" class="text-center">Acción</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -52,8 +52,9 @@
                             <tr class="text-center">
                                 <td class="text-center">{{ $talle->id }}</td>
                                 <td>{{ $talle->nombre_taller }}</td>
-                                <td>{{ $talle->horarios }}</td>
-                                <td>{{ $talle->ubicacion }}</td>
+                                <td>{{ $talle->descripcion }}</td>
+                                <td>{{ $talle->tipo }}</td>
+                                <td class="{{ $talle->estatus == 'Activo' ? 'text-success' : 'text-danger' }}">{{ $talle->estatus }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                         data-bs-target="#updateModal{{ $talle->id }}">

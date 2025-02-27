@@ -9,6 +9,7 @@ use App\Models\Roles;
 use App\Models\Talleres;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,30 +17,52 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $talleres =Talleres::all();
-        $eventos =Eventos::all();
-        return view('welcome', compact('talleres' , 'eventos'));
+        $talleres = Talleres::select('talleres.id', 'talleres.nombre_taller', 'talleres.descripcion', 'talleres.horarios_img', 'talleres.imagen', 'talleres.tipo', 'talleres.estatus', 'users.name as docente_name', 'users.app as docente_app', 'users.apm as docente_apm')
+            ->join('docente_tallers', 'docente_tallers.taller_id', 'talleres.id')
+            ->join('users', 'users.id', 'docente_tallers.user_id')
+            ->where('talleres.estatus', '=', 'activo')
+            ->get();
+        $eventos = Eventos::all();
+        return view('welcome', compact('talleres', 'eventos'));
     }
 
     public function viewAlumno()
     {
-        $talleres = Talleres::select('talleres.id', 'nombre_taller', 'horarios', 'alumno_tallers.constancia')
+        $talleres = Talleres::select('talleres.id', 'nombre_taller', 'tipo', 'alumno_tallers.constancia')
             ->join('alumno_tallers', 'alumno_tallers.taller_id', 'talleres.id')
             ->where('alumno_tallers.user_id', '=', Auth()->user()->id)
             ->where('alumno_tallers.estatus', '=', 'activo')
-        ->get();
-        
-        $periodos = AlumnoTaller::select('alumno_tallers.id', 'constancia', 'p.fecha_inicio', 'p.fecha_fin', 't.nombre_taller')
-            ->join('talleres as t', 't.id', 'alumno_tallers.taller_id')
-            ->join('asistencia as a', 'a.alumtalle_id', 'alumno_tallers.id')
-            ->join('periodos as p', 'p.id', 'a.periodo_id')
-            ->where('alumno_tallers.user_id', '=', Auth()->user()->id)
-            ->distinct()
+            ->get();
+
+        $periodos = \DB::table('alumno_tallers as at')
+        ->join('talleres as t', 'at.taller_id', '=', 't.id')
+        ->leftJoin('asistencia as a', 'at.id', '=', 'a.alumtalle_id')
+        ->leftJoin('periodos as p', 'a.periodo_id', '=', 'p.id')
+        ->select(
+            'at.id as alumno_taller_id',
+            'at.user_id',
+            't.nombre_taller',
+            'at.constancia',
+            'at.estatus',
+            'p.id as periodo_id',
+            'p.fecha_inicio',
+            'p.fecha_fin'
+        )
+        ->where('at.user_id', Auth()->user()->id)
+        ->groupBy('at.id',
+        't.nombre_taller', 
+        'at.user_id', 
+        'at.taller_id', 
+        'at.constancia', 
+        'at.estatus', 
+        'p.id', 
+        'p.fecha_inicio', 
+        'p.fecha_fin')
         ->get();
 
-        $eventos =Eventos::all();
+        $eventos = Eventos::all();
 
-        return view('alumno.index', compact('talleres','periodos' , 'eventos'));
+        return view('alumno.index', compact('talleres', 'periodos', 'eventos'));
     }
 
     public function show()

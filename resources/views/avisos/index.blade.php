@@ -3,7 +3,7 @@
 
 <div class="row">
   @foreach($talleres as $taller)
-    <div class="col s12 m12">
+    <div class="col s12 m12 center">
       <h2 class="header">{{ $taller->nombre_taller }}</h2>
     </div>
     @foreach($avisos as $aviso)

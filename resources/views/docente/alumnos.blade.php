@@ -1,5 +1,15 @@
 @extends('layout.layoutPlataforma')
 @section('content')
+@if(!$periodo)
+<div class="row">
+    <div class="col s12 m12 center">
+        <h2>Periodo no disponible</h2>
+        <p>El periodo no ha sido establecido aun, vuelva más tarde.</p>
+        <br><br><br>
+        <a href="/talleres-docente">Volver</a>
+    </div>
+</div>
+@else
 <div class="row">
     <div class="col sm-12 md-12 pt-3">
         <h2>{{ $taller->nombre_taller }}</h2>
@@ -41,7 +51,7 @@
                             Agénero
                         @elseif($alumno->genero == 'NI')
                             Identidad de género no incluida
-                        @elseif($alumno->genero == 'PE')
+                        @elseif($alumno->genero == 'SN')
                             Sin especificación
                         @endif
                     </td>
@@ -62,7 +72,6 @@
         <i class="large material-icons">menu</i>
     </a>
     <ul>
-        <li><a class="btn-floating red modal-trigger" href="#modal-evento"><i class="material-icons">art_track</i></a></li>
         <li><a class="btn-floating blue modal-trigger" href="#modal-aviso"><i class="material-icons">message</i></a></li>
         <li><a class="btn-floating green" href="{{ route('asistencia', ['id' => $taller->id]) }}"><i class="material-icons">assignment_turned_in</i></a></li>
     </ul>
@@ -82,6 +91,8 @@
 @section('js')
 <script>
     let porcentajes = @json($porcentajes) // Convertimos JSON de PHP a JS
+    
+    let rowID, rowDom;
 
     porcentajes.forEach(porcentaje => {
         rowID = `porcentaje${porcentaje.user_id}`
@@ -110,5 +121,5 @@
 </script>
 @endif
 @endsection
-
+@endif
 @endsection

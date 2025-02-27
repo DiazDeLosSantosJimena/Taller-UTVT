@@ -32,7 +32,25 @@ return [
 
        'local' => [
             'driver' => 'local',
+            'root' => public_path(''),
+            'throw' => false,
+        ],
+
+        'imagenes' => [
+            'driver' => 'local',
             'root' => public_path('img/imagenes'),
+            'throw' => false,
+        ],
+
+        'horarios' => [
+            'driver' => 'local',
+            'root' => public_path('img/horarios'),
+            'throw' => false,
+        ],
+
+        'portadas' => [
+            'driver' => 'local',
+            'root' => public_path('img/portadas'),
             'throw' => false,
         ],
 

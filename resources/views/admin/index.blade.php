@@ -30,10 +30,17 @@ $fecha_actual = date("Y-m-d");
 </div>
 @else
 <div class="row">
-    <div class="col">
+    <div class="col text-center">
         <h4>Periodo</h4>
-        <p>{{ $periodo->fecha_inicio .' | '. $periodo->fecha_fin }}</p>
+        <p class="text-capitalize">{{ \Carbon\Carbon::parse($periodo->fecha_inicio)->translatedFormat('F') .' | '. Carbon\Carbon::parse($periodo->fecha_fin)->translatedFormat('F') }}</p>
     </div>
+</div>
+@endif
+
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Exito!</strong> {{ session('success') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 
@@ -73,8 +80,39 @@ $fecha_actual = date("Y-m-d");
                 <p class="card-text">Eventos sobre los diferentes talleres.</p>
             </div>
             <div class="card-footer bg-transparent border-dark">
-                <a href="#" class="card-link text-reset">Ir...</a>
+                <a href="#" class="card-link text-reset" data-bs-toggle="modal" data-bs-target="#exampleModal">Ir...</a>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Evento -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Crear Evento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label"><strong class="text-danger">*</strong> Título del evento</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label"><strong class="text-danger">*</strong> Imagen del evento</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" aria-describedby="imagenHelp">
+                        <div id="imagenHelp" class="form-text">Este banner desaparecera despues de determinado tiempo.</div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Publicar</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
