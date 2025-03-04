@@ -11,6 +11,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TalleresController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DocentesTallerController;
+use App\Http\Controllers\GraficosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,8 @@ Route::get('/', function () {
     }
     return redirect('/inicio');
 });
+
+Route::get('/graficos', [GraficosController::class, 'index'])->name('graficos');
 
     //  Login
 Route::get('/login', [LoginController::class, 'show']);
