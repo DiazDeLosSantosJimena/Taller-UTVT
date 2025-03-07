@@ -52,7 +52,7 @@ $fecha_actual = date("Y-m-d");
                 <p class="card-text">Creación, lectura, edición y eliminación de los registros.</p>
             </div>
             <ul class="collapse list-group list-group-flush" id="collapseExample">
-                <li class="list-group-item"><a href="{{ route('users.show') }}"><i class="bi bi-people-fill"></i> Usuarios...</a></li>
+                <li class="list-group-item"><a href="{{ route('users.show') }}"><i class="bi bi-people-fill"></i> Alumnos...</a></li>
                 <li class="list-group-item"><a href="{{ route('taller.index') }}"><i class="bi bi-boxes"></i> Talleres...</a></li>
                 <li class="list-group-item"><a href="{{ route('tallerdocen.index') }}"><i class="bi bi-boxes"></i> Docentes Talleres...</a></li>
             </ul>

@@ -51,13 +51,13 @@ class DocenteController extends Controller
         $porcentajes = AsistenciaPorcentaje::select('asistencia_porcentaje.*', 'alumno_tallers.taller_id')
             ->join('alumno_tallers', 'alumno_tallers.user_id', '=', 'asistencia_porcentaje.user_id')
             ->whereNotNull('porcentaje_asistencia')
-            ->where('alumno_tallers.taller_id', 3)
+            ->where('alumno_tallers.taller_id', $id)
             ->get();
 
         // dd($porcentajes);
 
         $taller = Talleres::find($id);
-        $alumnos = User::select('users.id', 'name', 'app', 'apm', 'email', 'carrera', 'matricula', 'genero')
+        $alumnos = User::select('users.id', 'name', 'app', 'apm', 'email', 'carrera', 'matricula', 'genero', 'alumno_tallers.user_id as alumno_tallers_id')
             ->join('alumno_tallers', 'alumno_tallers.user_id', 'users.id')
             ->join('talleres', 'talleres.id', 'alumno_tallers.taller_id')
             ->where('talleres.id', '=', $id)
@@ -90,7 +90,7 @@ class DocenteController extends Controller
         FROM alumno_tallers AT
         JOIN users ON at.user_id = users.id 
         LEFT JOIN asistencia_semanal a ON at.id = a.alumtalle_id
-        WHERE a.alumtalle_id IS NULL AND at.taller_id = 3 AND at.estatus = "activo"');
+        WHERE a.alumtalle_id IS NULL AND at.taller_id = '.$id.' AND at.estatus = "activo"');
 
         return view('docente.asistencia', compact('alumnos', 'taller'));
     }

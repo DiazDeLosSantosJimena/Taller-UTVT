@@ -25,7 +25,7 @@
                     <th>Carrera</th>
                     <th class="center">Genero</th>
                     <th class="center">Asistencia</th>
-                    <th class="center">Acciones</th>
+                    <th colspan="2" class="center">Acciones</th>
                 </tr>
             </thead>
 
@@ -57,7 +57,10 @@
                     </td>
                     <td class="center" id="porcentaje{{ $alumno->id }}">0%</td>
                     <td class="center">
-                        <a class="waves-effect waves-light btn white black-text disabled">Constancia</a>
+                        <a class="waves-effect waves-light btn green white-text modal-trigger" href="#modal-comentario" onclick="datosAlumno({{ $alumno->alumno_tallers_id }})">Comentario</a>
+                    </td>
+                    <td>
+                        <a id="constancia{{ $alumno->id }}" class="waves-effect waves-light btn white black-text disabled">Constancia</a>
                     </td>
                 </tr>
                 @endforeach
@@ -98,10 +101,16 @@
         rowID = `porcentaje${porcentaje.user_id}`
         rowDom = document.getElementById(rowID);
 
-        console.log(porcentaje)
+        // console.log(porcentaje)
 
         porcentaje.porcentaje_asistencia === null ? rowDom.textContent = '0%' : rowDom.textContent = parseInt(porcentaje.porcentaje_asistencia) + '%'
     })
+</script>
+<script>
+    function datosAlumno(id){
+        const alumno_taller = document.getElementById('alumno_taller_id').value = id;
+        // console.log(alumno_taller)
+    }
 </script>
 @if(session('success'))
 <script>

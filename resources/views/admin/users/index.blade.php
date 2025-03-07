@@ -3,7 +3,7 @@
 <div class="row">
     <!-- Page Heading -->
     <div class="col-sm-6 col-md-6 pt-4">
-        <h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
+        <h1 class="h3 mb-0 text-gray-800">Alumnos</h1>
     </div>
     <div class="col-sm-6 col-md-6 p-4 d-flex justify-content-end">
         <div class="dropdown">
@@ -62,6 +62,7 @@
                 </tfoot>
                 <tbody>
                     @foreach ($usuarios as $user)
+                    @if($user->rol_id === 3)
                     <tr class="text-center">
                         <td class="text-center">{{ $user->id }}</td>
                         <td>{{ $user->name .' '. $user->app .' '. $user->apm }}</td>
@@ -78,9 +79,9 @@
                         </td>
                         <td>
                             @if($user->sexo == 'F')
-                            Femenino
+                            ♀️
                             @elseif($user->sexo == 'M')
-                            Masculino
+                            ♂️
                             @endif
                         </td>
                         <td>
@@ -98,7 +99,7 @@
                             Agénero
                             @elseif($user->genero == 'NI')
                             Identidad de género no incluida
-                            @elseif($user->genero == 'PE')
+                            @elseif($user->genero == 'SN')
                             Prefiero no especificar
                             @endif
                         </td>
@@ -117,6 +118,7 @@
                             </button>
                         </td>
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>

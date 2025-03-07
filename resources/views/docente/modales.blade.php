@@ -41,3 +41,31 @@
         </form>
     </div>
 </div>
+
+<!-- Modal para crear aviso -->
+<div id="modal-comentario" class="modal">
+    <div class="modal-content center">
+        <h4>Comentarios sobre el alumno.</h4>
+        <span>El siguiente comentario es para dar seguimiento al alumno y será usado para estadísticas.</span>
+        <form action="#" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="alumno_taller_id" id="alumno_taller_id" value="">
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="comentarios" name="comentarios" class="materialize-textarea" required></textarea>
+                            <label for="descripcion">Anotaciones:</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row center pt-3">
+                <div class="col s12">
+                    <button type="submit" class="btn waves-effect waves-light green">Guardar</button>
+                    <a href="#!" class="btn modal-close waves-effect waves-green red">Cerrar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

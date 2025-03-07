@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Talleres;
 use App\Models\DocenteTaller;
-
-
+use App\Models\Roles;
 use Illuminate\Http\Request;
 
 class DocentesTallerController extends Controller
@@ -14,6 +13,8 @@ class DocentesTallerController extends Controller
     public function index()
     {
         //Vista principal
+        $docentes = User::where('rol_id', 2)->get();
+        $roles = Roles::all();
         $talleresdocen = DB::table('docente_tallers as tu')
             ->join('users as u', 'tu.user_id', '=', 'u.id')
             ->join('talleres as t', 'tu.taller_id', '=', 't.id')
@@ -25,6 +26,7 @@ class DocentesTallerController extends Controller
                 't.nombre_taller'
             )
             ->get();
+
         //Consulta de select
         $userD = User::where('rol_id', 2)->whereNotIn('id', function ($query) {
             $query->select('user_id')->from('docente_tallers');})->get();
@@ -32,7 +34,7 @@ class DocentesTallerController extends Controller
         $tallers = Talleres::whereNotIn('id', function ($query) {
             $query->select('taller_id')->from('docente_tallers'); })->get();
      
-        return view('admin.talleresusers.index',compact('talleresdocen','userD','tallers',));
+        return view('admin.talleresusers.index',compact('talleresdocen','userD','tallers', 'docentes', 'roles'));
     }
     public function create()
     {
