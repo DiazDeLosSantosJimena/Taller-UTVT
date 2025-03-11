@@ -121,4 +121,10 @@ class DocenteController extends Controller
 
         return redirect()->route('alumnos-taller', ['id' => $request->input('taller_id')])->with('success', 'Asistencia realizada correctamente.');
     }
+
+    public function delete($id){
+        $docente = User::find($id);
+        $docente->delete();
+        return redirect()->route('tallerdocen.index')->with('success', 'Docente eliminado correctamente.');
+    }
 }

@@ -7,10 +7,16 @@
         <h1 class="h3 mb-0 text-gray-800">Docente talleres </h1>
     </div>
     <div class="col-sm-6 col-md-6 p-4 d-flex justify-content-end">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
-            Añadir
-        </button>
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Añadir
+            </button>
+            <ul class="dropdown-menu">
+                <!-- Button trigger modal -->
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#altaModalDocente">Añadir Docente</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#asignarDocenteTaller">Asignar Taller a Docente</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 @if (session('success'))
@@ -79,7 +85,7 @@
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal{{ $docente->id }}">
+                                        data-bs-target="#deleteModalDocente{{ $docente->id }}">
                                         Borrar
                                     </button>
                                 </td>

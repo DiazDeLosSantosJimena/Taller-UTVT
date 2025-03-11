@@ -35,30 +35,32 @@ class UsersController extends Controller
             ->get();
 
         $periodos = \DB::table('alumno_tallers as at')
-        ->join('talleres as t', 'at.taller_id', '=', 't.id')
-        ->leftJoin('asistencia as a', 'at.id', '=', 'a.alumtalle_id')
-        ->leftJoin('periodos as p', 'a.periodo_id', '=', 'p.id')
-        ->select(
-            'at.id as alumno_taller_id',
-            'at.user_id',
-            't.nombre_taller',
-            'at.constancia',
-            'at.estatus',
-            'p.id as periodo_id',
-            'p.fecha_inicio',
-            'p.fecha_fin'
-        )
-        ->where('at.user_id', Auth()->user()->id)
-        ->groupBy('at.id',
-        't.nombre_taller', 
-        'at.user_id', 
-        'at.taller_id', 
-        'at.constancia', 
-        'at.estatus', 
-        'p.id', 
-        'p.fecha_inicio', 
-        'p.fecha_fin')
-        ->get();
+            ->join('talleres as t', 'at.taller_id', '=', 't.id')
+            ->leftJoin('asistencia as a', 'at.id', '=', 'a.alumtalle_id')
+            ->leftJoin('periodos as p', 'a.periodo_id', '=', 'p.id')
+            ->select(
+                'at.id as alumno_taller_id',
+                'at.user_id',
+                't.nombre_taller',
+                'at.constancia',
+                'at.estatus',
+                'p.id as periodo_id',
+                'p.fecha_inicio',
+                'p.fecha_fin'
+            )
+            ->where('at.user_id', Auth()->user()->id)
+            ->groupBy(
+                'at.id',
+                't.nombre_taller',
+                'at.user_id',
+                'at.taller_id',
+                'at.constancia',
+                'at.estatus',
+                'p.id',
+                'p.fecha_inicio',
+                'p.fecha_fin'
+            )
+            ->get();
 
         $eventos = Eventos::all();
 
@@ -76,6 +78,49 @@ class UsersController extends Controller
     {
         // Lógica para mostrar el formulario de creación de usuario
         return view('users.create');
+    }
+
+    public function storeDocentes(Request $request)
+    {
+        //  Validaciones
+        $messages = [
+            'name.required' => 'Es necesario colocar un nombre.',
+            'app.required' => 'Es necesario colocar el primer apellido.',
+            'apm.required' => 'Es necesario completar el campo.',
+            'sexo.required' => 'Es necesario seleccionar una opción.',
+            'genero.required' => 'Es necesario seleccionar una opción.',
+            'fecha_nac.required' => 'Es necesario completar el campo.',
+            'email.required' => 'Es necesario colocar un correo.',
+            'email.unique' => 'El correo debe ser unico.',
+            'password.required' => 'Genere una contraseña'
+        ];
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'app' => ['required', 'string', 'max:255'],
+            'apm' => ['required', 'string', 'max:255'],
+            'sexo' => ['required'],
+            'genero' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:' . User::class],
+            'password' => ['required'],
+            'fecha_nac' => ['required']
+        ], $messages);
+
+        $usuario = new User([
+            'name' => $request->input('name'),
+            'app' => $request->input('app'),
+            'apm' => $request->input('apm'),
+            'sexo' => $request->input('sexo'),
+            'fecha_nac' => $request->input('fecha_nac'),
+            'genero' => $request->input('genero'),
+            'rol_id' => 2,
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+        ]);
+
+
+        $usuario->save();
+        return redirect()->route('tallerdocen.index')->with('success', 'Docente creado exitosamente');
     }
 
     public function store(Request $request)
@@ -96,7 +141,7 @@ class UsersController extends Controller
             'password.required' => 'Genere una contraseña',
         ];
 
-        if ($request->input('rol_id') == 1 || $request->input('rol_id') == 2) {
+        if ($request->input('rol_id') == 1) {
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'app' => ['required', 'string', 'max:255'],

@@ -1,4 +1,123 @@
-
+<!-- Modal Para crear Docentes START -->
+<div class="modal fade" id="altaModalDocente" tabindex="-1" aria-labelledby="altaModalDocenteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="altaModalDocenteLabel">Registro de Usuarios</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('storeDocentes') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="name" class="py-2"><strong style="color: red;">*</strong> Nombre:</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="nombre..." value="{{ old('name') }}">
+                            @error('name')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="app"><strong style="color: red;">*</strong> Apellido
+                                Paterno:</label>
+                            <input type="text" class="form-control" id="app" name="app"
+                                placeholder="apellido p..." value="{{ old('app') }}">
+                            @error('app')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="apm"><strong style="color: red;">*</strong> Apellido
+                                Materno:</label>
+                            <input type="text" class="form-control" id="apm" name="apm"
+                                placeholder="apellido m..." value="{{ old('apm') }}">
+                            @error('apm')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-12 pt-2">
+                        <label class="form-check-label">Sexo:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexo" value="F" {{  old('sexo') == 'F' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Femenino
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexo" value="M" {{ old('sexo') == 'M' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Masculino
+                            </label>
+                        </div>
+                        @error('sexo')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-12 pt-2">
+                        <div class="form-group">
+                            <label for="genero"><strong style="color: red;">*</strong> Genero:</label>
+                            <select class="form-control" name="genero" id="genero">
+                                <option value="" selected>Seleccione...</option>
+                                <option value="M">Mujer</option>
+                                <option value="H">Hombre</option>
+                                <option value="NB">No Binario</option>
+                                <option value="MT">Mujer Transgénero</option>
+                                <option value="HT">Hombre Transgénero</option>
+                                <option value="AG">Agénero</option>
+                                <option value="NI">Identidad de género no incluida</option>
+                                <option value="PE">Prefiero no especificar</option>
+                            </select>
+                        </div>
+                        @error('genero')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-12 pt-2">
+                        <label for="exampleFormControlInput1" class="form-label">Fecha de nacimiento</label>
+                        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="{{ old('fecha_nac') }}">
+                        @error('fecha_nac')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-12 pt-2">
+                        <label for="email"><strong style="color: red;">*</strong> Correo electrónico:</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="{{ old('email') }}">
+                        <small id="emailHelp" class="form-text text-muted">Ingrese el correo</small>
+                        @error('email')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-12 pt-2">
+                        <label for="password"><strong style="color: red;">*</strong> Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        @error('password')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-12 pt-2">
+                        <div class="form-group">
+                            <label for="rol_id"><strong style="color: red;">*</strong> Selecciona una
+                                opción:</label>
+                            <select class="form-control" id="rol_id" name="rol_id" disabled>
+                                <option value="2" selected>Docente</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success">Añadir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Modal Para editar Administradores y Docentes START -->
 @foreach ($docentes as $user)
 <div class="modal fade" id="editModal{{ $user->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -161,8 +280,37 @@
 </div>
 @endforeach
 <!-- Modal Para editar Administradores y Docentes END -->
-<!-- Modal TALLERES CREATE -->
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!-- Modal Docente delete START -->
+@foreach ($docentes as $user)
+<div class="modal fade" id="deleteModalDocente{{ $user->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar Taller | Docente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                ¿Realmente desea eliminar el registro?
+                <strong>
+                    <p>{{ $user->name .' '. $user->app .' '. $user->apm}}</p>
+                </strong>
+            </div>
+            <div class="modal-footer">
+            <form action="{{ route('docente.delete', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                {!! csrf_field() !!}
+                @method("delete")
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Borrar</button>
+            </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+<!-- Modal Asignar docentes a talleres CREATE -->
+<div class="modal fade" id="asignarDocenteTaller" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

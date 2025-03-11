@@ -12,6 +12,7 @@ use App\Http\Controllers\TalleresController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DocentesTallerController;
 use App\Http\Controllers\GraficosController;
+use App\Models\DocenteTaller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,8 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
 //  Docentes
+Route::resource('docente', DocenteController::class);
+Route::name('docente.delete')->delete('deleteDocente/{id}', [DocenteController::class, 'delete']);
 Route::get('/talleres-docente',[DocenteController::class, 'index']);
 Route::name('alumnos-taller')->get('alumnos-taller/{id}', [DocenteController::class, 'alumnos_taller']);
 Route::name('asistencia')->get('asistencia/{id}', [DocenteController::class, 'asistenciaView']);
@@ -70,6 +73,7 @@ Route::name('agregar_periodo')->post('nuevoPeriodo', [Controller::class, 'newPer
 Route::resource('/users', UsersController::class);
 Route::name('users.show')->get('/users/show', [UsersController::class, 'show']);
 Route::post('/import', [UsersController::class, 'import'])->name('import');
+Route::post('storeDocentes', [UsersController::class, 'storeDocentes'])->name('storeDocentes');
 
 Route::resource('/taller', TalleresController::class);
 Route::resource('/tallerdocen',DocentesTallerController::class);
