@@ -13,7 +13,7 @@ class AlumnoTallerController extends Controller
     {
         // dd($request->all());
         $messages = [
-            'taller_id.required' => 'Es necesario colocar un nombre.',
+            'taller_id.required' => 'Es necesario seleccionar un taller.',
             'taller_id.exists' => 'Error en el registro.'
         ];
 

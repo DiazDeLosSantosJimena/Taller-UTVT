@@ -18,8 +18,8 @@ class UsersController extends Controller
     public function index()
     {
         $talleres = Talleres::select('talleres.id', 'talleres.nombre_taller', 'talleres.descripcion', 'talleres.horarios_img', 'talleres.imagen', 'talleres.tipo', 'talleres.estatus', 'users.name as docente_name', 'users.app as docente_app', 'users.apm as docente_apm')
-            ->join('docente_tallers', 'docente_tallers.taller_id', 'talleres.id')
-            ->join('users', 'users.id', 'docente_tallers.user_id')
+            ->leftJoin('docente_tallers', 'docente_tallers.taller_id', 'talleres.id')
+            ->leftJoin('users', 'users.id', 'docente_tallers.user_id')
             ->where('talleres.estatus', '=', 'activo')
             ->get();
         $eventos = Eventos::all();
