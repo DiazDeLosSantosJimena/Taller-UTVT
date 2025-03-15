@@ -14,5 +14,6 @@ class Eventos extends Model
         'user_id',  // Agrega el campo 'user_id'
         'titulo',
         'imagen',
+        'expires_at'
     ];
 }
