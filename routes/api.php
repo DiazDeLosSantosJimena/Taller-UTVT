@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AlumnosController;
 use App\Http\Controllers\Api\AvisosController;
 use App\Http\Controllers\Api\DocenteController;
+use App\Http\Controllers\Api\EventosController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\UsersController;
 use Illuminate\Http\Request;
@@ -41,3 +42,6 @@ Route::post('/asistencia/{taller}', [DocenteController::class, 'asistencia']);
 //  Avisos
 Route::get('/avisos', [AvisosController::class, 'avisosView']);
 Route::post('/crear-aviso/{taller}', [AvisosController::class, 'crear']);
+
+//  Eventos
+Route::get('/eventos', [EventosController::class, 'eventosView']);
