@@ -21,23 +21,23 @@ USE `taller`;
 DROP TABLE IF EXISTS `alumno_tallers`;
 
 CREATE TABLE `alumno_tallers` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned NOT NULL,
-  `taller_id` bigint(20) unsigned NOT NULL,
-  `constancia` tinyint(1) NOT NULL,
-  `estatus` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
+  `taller_id` BIGINT(20) UNSIGNED NOT NULL,
+  `constancia` TINYINT(1) NOT NULL,
+  `estatus` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `alumno_tallers_user_id_foreign` (`user_id`),
   KEY `alumno_tallers_taller_id_foreign` (`taller_id`),
   CONSTRAINT `alumno_tallers_taller_id_foreign` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`),
   CONSTRAINT `alumno_tallers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `alumno_tallers` */
 
-insert  into `alumno_tallers`(`id`,`user_id`,`taller_id`,`constancia`,`estatus`,`created_at`,`updated_at`) values 
+INSERT  INTO `alumno_tallers`(`id`,`user_id`,`taller_id`,`constancia`,`estatus`,`created_at`,`updated_at`) VALUES 
 (1,27,1,0,'Activo','2025-02-25 23:59:33','2025-02-25 23:59:33'),
 (2,37,1,0,'Activo','2025-02-25 23:59:33','2025-02-25 23:59:33'),
 (3,36,1,0,'Activo','2025-02-25 23:59:33','2025-02-25 23:59:33'),
@@ -73,22 +73,22 @@ insert  into `alumno_tallers`(`id`,`user_id`,`taller_id`,`constancia`,`estatus`,
 DROP TABLE IF EXISTS `asistencia`;
 
 CREATE TABLE `asistencia` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `alumtalle_id` bigint(20) unsigned NOT NULL,
-  `periodo_id` bigint(20) unsigned NOT NULL,
-  `fecha` date NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `alumtalle_id` BIGINT(20) UNSIGNED NOT NULL,
+  `periodo_id` BIGINT(20) UNSIGNED NOT NULL,
+  `fecha` DATE NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `asistencia_alumtalle_id_foreign` (`alumtalle_id`),
   KEY `asistencia_periodo_id_foreign` (`periodo_id`),
   CONSTRAINT `asistencia_alumtalle_id_foreign` FOREIGN KEY (`alumtalle_id`) REFERENCES `alumno_tallers` (`id`),
   CONSTRAINT `asistencia_periodo_id_foreign` FOREIGN KEY (`periodo_id`) REFERENCES `periodos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `asistencia` */
 
-insert  into `asistencia`(`id`,`alumtalle_id`,`periodo_id`,`fecha`,`created_at`,`updated_at`) values 
+INSERT  INTO `asistencia`(`id`,`alumtalle_id`,`periodo_id`,`fecha`,`created_at`,`updated_at`) VALUES 
 (1,7,1,'2025-02-11','2025-02-18 00:05:49','2025-02-26 00:05:49'),
 (2,8,1,'2025-02-21','2025-02-26 00:09:18','2025-02-26 00:09:18'),
 (3,7,1,'2025-02-18','2025-02-26 00:44:14','2025-02-26 00:44:14'),
@@ -110,24 +110,24 @@ insert  into `asistencia`(`id`,`alumtalle_id`,`periodo_id`,`fecha`,`created_at`,
 DROP TABLE IF EXISTS `avisos`;
 
 CREATE TABLE `avisos` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned NOT NULL,
-  `taller_id` bigint(20) unsigned NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `descripcion` text NOT NULL,
-  `imagen` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
+  `taller_id` BIGINT(20) UNSIGNED NOT NULL,
+  `titulo` VARCHAR(255) NOT NULL,
+  `descripcion` TEXT NOT NULL,
+  `imagen` TEXT DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `avisos_user_id_foreign` (`user_id`),
   KEY `avisos_taller_id_foreign` (`taller_id`),
   CONSTRAINT `avisos_taller_id_foreign` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`),
   CONSTRAINT `avisos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `avisos` */
 
-insert  into `avisos`(`id`,`user_id`,`taller_id`,`titulo`,`descripcion`,`imagen`,`created_at`,`updated_at`) values 
+INSERT  INTO `avisos`(`id`,`user_id`,`taller_id`,`titulo`,`descripcion`,`imagen`,`created_at`,`updated_at`) VALUES 
 (1,4,3,'Torneo de Voleibol','El día viernes habrá un torneo para todos los equipos interesados en el taller de Voleibol, junta a tus amigos y únanse a los partidos. El ganador recibirá un premio y la posibilidad de otorgar su constancia sin importar el porcentaje de asistencias de los integrantes.',NULL,'2025-02-26 01:03:30','2025-02-26 01:03:30'),
 (2,2,1,'Por la constancia!','Junta a tu equipo para que represente a tu carrera y enfrentate contra las demás para saber que carrera sabe jugar a futbol! Para más información asistir a la bodega a un lado de la papelería.',NULL,'2025-03-12 22:48:35','2025-03-12 22:48:35');
 
@@ -136,21 +136,21 @@ insert  into `avisos`(`id`,`user_id`,`taller_id`,`titulo`,`descripcion`,`imagen`
 DROP TABLE IF EXISTS `docente_tallers`;
 
 CREATE TABLE `docente_tallers` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned NOT NULL,
-  `taller_id` bigint(20) unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
+  `taller_id` BIGINT(20) UNSIGNED NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `docente_tallers_user_id_foreign` (`user_id`),
   KEY `docente_tallers_taller_id_foreign` (`taller_id`),
   CONSTRAINT `docente_tallers_taller_id_foreign` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`),
   CONSTRAINT `docente_tallers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `docente_tallers` */
 
-insert  into `docente_tallers`(`id`,`user_id`,`taller_id`,`created_at`,`updated_at`) values 
+INSERT  INTO `docente_tallers`(`id`,`user_id`,`taller_id`,`created_at`,`updated_at`) VALUES 
 (2,3,2,'2025-02-25 23:31:33','2025-02-25 23:31:33'),
 (3,4,3,'2025-02-25 23:32:30','2025-02-25 23:32:30'),
 (4,5,4,'2025-02-25 23:32:38','2025-02-25 23:32:38'),
@@ -163,20 +163,21 @@ insert  into `docente_tallers`(`id`,`user_id`,`taller_id`,`created_at`,`updated_
 DROP TABLE IF EXISTS `eventos`;
 
 CREATE TABLE `eventos` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `imagen` text NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
+  `titulo` VARCHAR(255) NOT NULL,
+  `imagen` TEXT NOT NULL,
+  `expires_at` TIMESTAMP NULL DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `eventos_user_id_foreign` (`user_id`),
   CONSTRAINT `eventos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `eventos` */
 
-insert  into `eventos`(`id`,`user_id`,`titulo`,`imagen`,`created_at`,`updated_at`) values 
+INSERT  INTO `eventos`(`id`,`user_id`,`titulo`,`imagen`,`created_at`,`updated_at`) VALUES 
 (1,1,'Exposición de Arte','20250315011237_artes.jpg','2025-03-15 01:12:37','2025-03-15 01:12:37'),
 (2,1,'Convenio de colaboración','20250315013021_convenio.jpg','2025-03-15 01:30:21','2025-03-15 01:30:21');
 
@@ -185,16 +186,16 @@ insert  into `eventos`(`id`,`user_id`,`titulo`,`imagen`,`created_at`,`updated_at
 DROP TABLE IF EXISTS `failed_jobs`;
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uuid` VARCHAR(255) NOT NULL,
+  `connection` TEXT NOT NULL,
+  `queue` TEXT NOT NULL,
+  `payload` LONGTEXT NOT NULL,
+  `exception` LONGTEXT NOT NULL,
+  `failed_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `failed_jobs` */
 
@@ -203,15 +204,15 @@ CREATE TABLE `failed_jobs` (
 DROP TABLE IF EXISTS `migrations`;
 
 CREATE TABLE `migrations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL,
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` VARCHAR(255) NOT NULL,
+  `batch` INT(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
-insert  into `migrations`(`id`,`migration`,`batch`) values 
+INSERT  INTO `migrations`(`id`,`migration`,`batch`) VALUES 
 (1,'2014_06_07_152938_create_roles_table',1),
 (2,'2014_10_12_000000_create_users_table',1),
 (3,'2014_10_12_100000_create_password_reset_tokens_table',1),
@@ -232,11 +233,11 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 DROP TABLE IF EXISTS `password_reset_tokens`;
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `token` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `password_reset_tokens` */
 
@@ -245,17 +246,17 @@ CREATE TABLE `password_reset_tokens` (
 DROP TABLE IF EXISTS `periodos`;
 
 CREATE TABLE `periodos` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `fecha_inicio` date NOT NULL,
-  `fecha_fin` date NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `fecha_inicio` DATE NOT NULL,
+  `fecha_fin` DATE NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `periodos` */
 
-insert  into `periodos`(`id`,`fecha_inicio`,`fecha_fin`,`created_at`,`updated_at`) values 
+INSERT  INTO `periodos`(`id`,`fecha_inicio`,`fecha_fin`,`created_at`,`updated_at`) VALUES 
 (1,'2025-01-06','2025-04-15','2025-02-25 23:31:02','2025-02-25 23:31:02');
 
 /*Table structure for table `personal_access_tokens` */
@@ -263,20 +264,20 @@ insert  into `periodos`(`id`,`fecha_inicio`,`fecha_fin`,`created_at`,`updated_at
 DROP TABLE IF EXISTS `personal_access_tokens`;
 
 CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) unsigned NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tokenable_type` VARCHAR(255) NOT NULL,
+  `tokenable_id` BIGINT(20) UNSIGNED NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `token` VARCHAR(64) NOT NULL,
+  `abilities` TEXT DEFAULT NULL,
+  `last_used_at` TIMESTAMP NULL DEFAULT NULL,
+  `expires_at` TIMESTAMP NULL DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `personal_access_tokens` */
 
@@ -285,18 +286,18 @@ CREATE TABLE `personal_access_tokens` (
 DROP TABLE IF EXISTS `publicaciones`;
 
 CREATE TABLE `publicaciones` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned NOT NULL,
-  `titulo` varchar(255) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `tipo` varchar(255) DEFAULT NULL,
-  `imagen` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
+  `titulo` VARCHAR(255) DEFAULT NULL,
+  `descripcion` VARCHAR(255) DEFAULT NULL,
+  `tipo` VARCHAR(255) DEFAULT NULL,
+  `imagen` TEXT DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `publicaciones_user_id_foreign` (`user_id`),
   CONSTRAINT `publicaciones_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `publicaciones` */
 
@@ -305,16 +306,16 @@ CREATE TABLE `publicaciones` (
 DROP TABLE IF EXISTS `roles`;
 
 CREATE TABLE `roles` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `roles` */
 
-insert  into `roles`(`id`,`name`,`created_at`,`updated_at`) values 
+INSERT  INTO `roles`(`id`,`name`,`created_at`,`updated_at`) VALUES 
 (1,'Administrador','2025-02-25 02:00:19','2025-02-25 02:00:19'),
 (2,'Docente','2025-02-25 02:00:19','2025-02-25 02:00:19'),
 (3,'Alumno','2025-02-25 02:00:19','2025-02-25 02:00:19');
@@ -324,21 +325,21 @@ insert  into `roles`(`id`,`name`,`created_at`,`updated_at`) values
 DROP TABLE IF EXISTS `talleres`;
 
 CREATE TABLE `talleres` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre_taller` varchar(255) NOT NULL,
-  `descripcion` text NOT NULL,
-  `horarios_img` text NOT NULL,
-  `imagen` text NOT NULL,
-  `tipo` varchar(255) NOT NULL,
-  `estatus` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre_taller` VARCHAR(255) NOT NULL,
+  `descripcion` TEXT NOT NULL,
+  `horarios_img` TEXT NOT NULL,
+  `imagen` TEXT NOT NULL,
+  `tipo` VARCHAR(255) NOT NULL,
+  `estatus` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `talleres` */
 
-insert  into `talleres`(`id`,`nombre_taller`,`descripcion`,`horarios_img`,`imagen`,`tipo`,`estatus`,`created_at`,`updated_at`) values 
+INSERT  INTO `talleres`(`id`,`nombre_taller`,`descripcion`,`horarios_img`,`imagen`,`tipo`,`estatus`,`created_at`,`updated_at`) VALUES 
 (1,'Futbol','Deporte de equipo donde 11 jugadores buscan anotar goles pateando un balón en la portería contraria. Se juega en una cancha rectangular y gana el equipo con más goles.','FUTBOL.jpg','futbolSoccer.jpg','Deportivo','Activo','2025-02-25 02:00:27','2025-02-25 02:00:27'),
 (2,'Basquetbol','Deporte de equipo donde 5 jugadores buscan anotar puntos en una canasta contraria. Se juega en una cancha rectangular y gana el equipo con más puntos.','BASQUETBOL.jpg','basquetbol.jpg','Deportivo','Activo','2025-02-25 02:00:27','2025-02-25 02:00:27'),
 (3,'Voleibol','Es un deporte donde dos equipos se enfrentan sobre un terreno de juego liso separados por una red central, tratando de pasar el balón por encima de la red hacia el suelo del campo contrario.','VOLEIBOL.jpg','voleibol.jpg','Deportivo','Activo','2025-02-25 02:00:27','2025-02-25 02:00:27'),
@@ -354,32 +355,32 @@ insert  into `talleres`(`id`,`nombre_taller`,`descripcion`,`horarios_img`,`image
 DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `app` varchar(50) NOT NULL,
-  `apm` varchar(50) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `carrera` varchar(255) DEFAULT NULL,
-  `matricula` varchar(255) DEFAULT NULL,
-  `nss` varchar(255) DEFAULT NULL,
-  `fecha_nac` date DEFAULT NULL,
-  `sexo` varchar(255) NOT NULL,
-  `genero` varchar(255) DEFAULT NULL,
-  `rol_id` bigint(20) unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `app` VARCHAR(50) NOT NULL,
+  `apm` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `email_verified_at` TIMESTAMP NULL DEFAULT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `remember_token` VARCHAR(100) DEFAULT NULL,
+  `carrera` VARCHAR(255) DEFAULT NULL,
+  `matricula` VARCHAR(255) DEFAULT NULL,
+  `nss` VARCHAR(255) DEFAULT NULL,
+  `fecha_nac` DATE DEFAULT NULL,
+  `sexo` VARCHAR(255) NOT NULL,
+  `genero` VARCHAR(255) DEFAULT NULL,
+  `rol_id` BIGINT(20) UNSIGNED NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_rol_id_foreign` (`rol_id`),
   CONSTRAINT `users_rol_id_foreign` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`app`,`apm`,`email`,`email_verified_at`,`password`,`remember_token`,`carrera`,`matricula`,`nss`,`fecha_nac`,`sexo`,`genero`,`rol_id`,`created_at`,`updated_at`) values 
+INSERT  INTO `users`(`id`,`name`,`app`,`apm`,`email`,`email_verified_at`,`password`,`remember_token`,`carrera`,`matricula`,`nss`,`fecha_nac`,`sexo`,`genero`,`rol_id`,`created_at`,`updated_at`) VALUES 
 (1,'Administrador','Sistemas','Talleres','admin@utvt.com',NULL,'$2y$12$LCtFILZMx1XU/REhIrHeT.48sOmluvVVOcPQMqu0irziCwnAEiyxO',NULL,'Sistemas','000000000','49180365113','2001-01-01','F','NB',1,'2025-02-25 02:00:19','2025-02-25 02:00:19'),
 (2,'Docente','1','UTVT','docente1@utvt.com',NULL,'$2y$12$p7bBkyMIfSrB/kqvQsMii.a8IgfqP2xNv.1p4NceuzfNvYwTt0DyS',NULL,'Mtro. Educación Motriz','000000000','49180000000','2001-01-01','F','NB',2,'2025-02-25 02:00:20','2025-02-25 02:00:20'),
 (3,'Docente','2','UTVT','docente2@utvt.com',NULL,'$2y$12$ccpULKdrxmdU4XIeQFuSi.1JRWie7lvYCxQe4EJXukfxbHFsTiaDi',NULL,'Mtro. Educación Motriz','000000000','49180000001','2001-01-01','F','NB',2,'2025-02-25 02:00:20','2025-02-25 02:00:20'),
