@@ -31,6 +31,20 @@ class AlumnosController extends Controller
         ], 200);
     }
 
+    function taller($id): JsonResponse{
+        
+        $taller = Talleres::select('talleres.id', 'talleres.nombre_taller', 'talleres.descripcion', 'talleres.horarios_img', 'talleres.imagen', 'talleres.tipo', 'talleres.estatus', 'users.name as docente_name', 'users.app as docente_app', 'users.apm as docente_apm')
+            ->leftJoin('docente_tallers', 'docente_tallers.taller_id', 'talleres.id')
+            ->leftJoin('users', 'users.id', 'docente_tallers.user_id')
+            ->where('talleres.estatus', '=', 'activo')
+            ->where('talleres.id', $id)
+            ->get();
+
+        return response()->json([
+            'taller' => $taller
+        ], 200);
+    }
+
     function talleresView(User $user): JsonResponse
     {
         $talleres = Talleres::select('talleres.id', 'nombre_taller', 'tipo', 'alumno_tallers.constancia')
@@ -91,7 +105,7 @@ class AlumnosController extends Controller
             if($exists){
                 return response()->json([
                     'success' => false,
-                    'message' => 'Ya se encuentra inscrito en el taller.'
+                    'message' => 'Ya se encuentra inscrito en el taller!'
                 ],500);
             }
 

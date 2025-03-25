@@ -31,6 +31,7 @@ Route::post('logout', [LoginController::class, 'logout']);
 //  Alumnos
 Route::get('/inicio', [AlumnosController::class, 'index']);
 Route::get('/talleres/{user}', [AlumnosController::class, 'talleresView']);
+Route::get('/taller/{taller}', [AlumnosController::class, 'taller']);
 Route::post('/inscripcion-talleres', [AlumnosController::class, 'incripcionTaller']);
 
 //  Docente

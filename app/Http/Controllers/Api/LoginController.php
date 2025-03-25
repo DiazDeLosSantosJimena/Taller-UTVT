@@ -27,8 +27,8 @@ class LoginController extends Controller
         if (!Auth::validate($credentials)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid email or password',
-            ], 401);
+                'message' => 'Correo o contraseña invalidos!',
+            ], 200);
         }
 
         //  Consulta para obtener la validación del login
