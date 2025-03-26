@@ -61,10 +61,12 @@ Route::get('/talleres-docente',[DocenteController::class, 'index']);
 Route::name('alumnos-taller')->get('alumnos-taller/{id}', [DocenteController::class, 'alumnos_taller']);
 Route::name('asistencia')->get('asistencia/{id}', [DocenteController::class, 'asistenciaView']);
 Route::post('asistencia/register', [DocenteController::class, 'asistenciaRegister'])->name('asistenciaRegister');
+Route::post('constancia-alumno', [DocenteController::class, 'constancia'])->name('constancia-alumno');
+Route::post('comentario', [DocenteController::class, 'crear_comentario'])->name('comentario');
 
 //  Alumnos
 Route::get('/talleres-alumno',[UsersController::class, 'viewAlumno']);
-Route::get('/constancia', [PDFController::class, 'generarPDF']);
+Route::get('/constancia/{taller}', [PDFController::class, 'generarPDF'])->name('constancia');
 
 Route::get('/inicio', [UsersController::class, 'index']);
 Route::name('admin')->get('/admin', [Controller::class, 'index']);
@@ -78,6 +80,7 @@ Route::post('storeDocentes', [UsersController::class, 'storeDocentes'])->name('s
 Route::resource('/taller', TalleresController::class);
 Route::resource('/tallerdocen',DocentesTallerController::class);
 Route::name('deletetalledo')->delete('deletetalledo/{id}', [DocentesTallerController::class, 'destroy']);
+Route::name('desactivarTaller')->put('desactivarTaller/{id}', [TalleresController::class, 'desactivarTaller']);
 
 // Publicaciones
 Route::resource('/publicaciones', EventosPublicacionesController::class);

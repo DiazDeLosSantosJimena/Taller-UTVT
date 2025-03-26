@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('publicaciones', function (Blueprint $table) {
+        Schema::create('comentarios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('titulo')->nullable();
-            $table->string('descripcion')->nullable();
-            $table->string('tipo')->nullable();
-            $table->text('imagen', 255)->nullable();
+            $table->foreignId('alumno_taller_id')->constrained('alumno_tallers');
+            $table->date('fecha');
+            $table->text('comentario');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('publicaciones');
+        Schema::dropIfExists('comentarios');
     }
 };

@@ -170,3 +170,29 @@
 </div>
 @endforeach
 <!-- END TALLER UPDATE -->
+
+<!-- Modal TALLER ACTIVAR -->
+@foreach ($talleres as $taller)
+<div class="modal fade" id="modalActivar{{ $taller->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Alumno</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                ¿Estás seguro de que deseas desactivar el taller: <strong>{{ $taller->nombre_taller }}</strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form action="{{ route('desactivarTaller', $taller->id) }}" method="POST">
+                    @method('PUT')
+                    @csrf
+                    <button type="submit" class="btn {{ $taller->estatus === 'Activo' ? 'btn-danger' : 'btn-success' }}">{{ $taller->estatus === 'Activo' ? 'Desactivar' : 'Activar' }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- END TALLER ACTIVAR -->

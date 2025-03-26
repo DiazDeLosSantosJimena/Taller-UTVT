@@ -56,11 +56,11 @@
                         @endif
                     </td>
                     <td class="center" id="porcentaje{{ $alumno->id }}">0%</td>
-                    <td class="center">
-                        <a class="waves-effect waves-light btn green white-text modal-trigger" href="#modal-comentario" onclick="datosAlumno({{ $alumno->alumno_tallers_id }})">Comentario</a>
-                    </td>
                     <td>
-                        <a id="constancia{{ $alumno->id }}" class="waves-effect waves-light btn white black-text disabled">Constancia</a>
+                        <a class="waves-effect waves-light btn white black-text @if(date('Y-m-d') < $periodo->fecha_fin || $alumno->constancia != 0) disabled @endif" onclick="modalConstancia({{ $alumno->alumno_tallers_id }});">Constancia</a>
+                    </td>
+                    <td class="center">
+                        <a class="waves-effect waves-light btn green white-text modal-trigger" href="#" onclick="datosAlumno({{ $alumno->alumno_tallers_id }})"><i class="material-icons">edit</i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -92,43 +92,7 @@
 
 
 @section('js')
-<script>
-    let porcentajes = @json($porcentajes) // Convertimos JSON de PHP a JS
-    
-    let rowID, rowDom;
-
-    porcentajes.forEach(porcentaje => {
-        rowID = `porcentaje${porcentaje.user_id}`
-        rowDom = document.getElementById(rowID);
-
-        // console.log(porcentaje)
-
-        porcentaje.porcentaje_asistencia === null ? rowDom.textContent = '0%' : rowDom.textContent = parseInt(porcentaje.porcentaje_asistencia) + '%'
-    })
-</script>
-<script>
-    function datosAlumno(id){
-        const alumno_taller = document.getElementById('alumno_taller_id').value = id;
-        // console.log(alumno_taller)
-    }
-</script>
-@if(session('success'))
-<script>
-    M.toast({html: "{{ session('success') }}", classes: 'green darken-3'})
-</script>
-@endif
-@if(session('eventSuccess'))
-<script>
-    var toastHTML = `<span>{{ session('eventSuccess') }}</span><a href="/inicio#eventos" class="btn-flat toast-action">Ir...</a>`;
-    M.toast({html: toastHTML, classes: 'green darken-3'})
-</script>
-@endif
-@if(session('avisoSuccess'))
-<script>
-    var toastHTML = `<span>{{ session('avisoSuccess') }}</span><a href="/avisos" class="btn-flat toast-action">Ir...</a>`;
-    M.toast({html: toastHTML, classes: 'green darken-3'})
-</script>
-@endif
+@include('docente.docenteJS')
 @endsection
 @endif
 @endsection

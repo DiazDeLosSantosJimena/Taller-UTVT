@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Talleres;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -161,8 +162,18 @@ class TalleresController extends Controller
         return redirect()->route('taller.index')->with('success', 'Taller actualizado exitosamente.');
     }
 
-    public function destroy(string $id)
+    public function desactivarTaller($taller)
     {
-        //
+        $taller = Talleres::find($taller);
+        if($taller->estatus === 'Inactivo'){
+            $taller->estatus = 'Activo';
+            $taller->save();
+        return redirect()->route('taller.index')->with('success', 'Taller activado exitosamente');
+        }else{
+            $taller->estatus = 'Inactivo';
+            $taller->save();
+        return redirect()->route('taller.index')->with('success', 'Taller desactivado exitosamente');
+        }
+        
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AlumnoTaller;
 use App\Models\Asistencia;
 use App\Models\AsistenciaPorcentaje;
+use App\Models\Comentarios;
 use App\Models\DocenteTaller;
 use App\Models\Periodo;
 use App\Models\Talleres;
@@ -57,7 +58,7 @@ class DocenteController extends Controller
         // dd($porcentajes);
 
         $taller = Talleres::find($id);
-        $alumnos = User::select('users.id', 'name', 'app', 'apm', 'email', 'carrera', 'matricula', 'genero', 'alumno_tallers.user_id as alumno_tallers_id')
+        $alumnos = User::select('users.id', 'name', 'app', 'apm', 'email', 'carrera', 'matricula', 'genero', 'alumno_tallers.id as alumno_tallers_id', 'alumno_tallers.constancia')
             ->join('alumno_tallers', 'alumno_tallers.user_id', 'users.id')
             ->join('talleres', 'talleres.id', 'alumno_tallers.taller_id')
             ->where('talleres.id', '=', $id)
@@ -73,6 +74,7 @@ class DocenteController extends Controller
 
     public function asistenciaView($id)
     {
+        $periodo = Periodo::latest()->first();
         $taller = Talleres::find($id);
         
         // $alumnos = User::select('users.id', 'name', 'app', 'apm', 'email', 'carrera', 'matricula', 'genero')
@@ -92,7 +94,18 @@ class DocenteController extends Controller
         LEFT JOIN asistencia_semanal a ON at.id = a.alumtalle_id
         WHERE a.alumtalle_id IS NULL AND at.taller_id = '.$id.' AND at.estatus = "activo"');
 
-        return view('docente.asistencia', compact('alumnos', 'taller'));
+        return view('docente.asistencia', compact('alumnos', 'taller', 'periodo'));
+    }
+
+    public function constancia(Request $request)
+    {
+
+        $alumno_taller = AlumnoTaller::find($request->input('alumno_tallers_id'));
+
+        $alumno_taller->constancia = 1;
+        $alumno_taller->save();
+
+        return redirect()->route('alumnos-taller', ['id' => $alumno_taller->taller_id])->with('success', 'Constancia concedida.');
     }
 
     public function asistenciaRegister(Request $request)
@@ -120,6 +133,36 @@ class DocenteController extends Controller
         }
 
         return redirect()->route('alumnos-taller', ['id' => $request->input('taller_id')])->with('success', 'Asistencia realizada correctamente.');
+    }
+
+    function comentarios_alumno($id){
+        $comentarios = Comentarios::select('id', 'alumno_taller_id', 'fecha', 'comentario as comentario_docente')->where('alumno_taller_id', $id)->get();
+
+        $alumno = AlumnoTaller::select('us.name', 'us.app', 'us.apm')
+            ->join('users as us', 'us.id', 'alumno_tallers.user_id')
+            ->where('alumno_tallers.id', $id)
+            ->get();
+
+        return response()->json([
+            'comentarios' => $comentarios,
+            'alumno' => $alumno
+        ], 200);
+    }
+
+    public function crear_comentario(Request $request){
+        
+        $request->validate([
+            'comentarios' => 'required',
+            'alumno_taller_id' => 'required'
+        ]);
+
+        $comentario = Comentarios::create(array(
+            'fecha' => date('Y-m-d'),
+            'comentario' => $request->input('comentarios'),
+            'alumno_taller_id' => $request->input('alumno_taller_id')
+        ));
+
+        return redirect()->back()->with('success', 'Comentario creado correctamente.');
     }
 
     public function delete($id){

@@ -42,12 +42,12 @@
     </div>
 </div>
 
-<!-- Modal para crear aviso -->
+<!-- Modal para crear comentario del alumno -->
 <div id="modal-comentario" class="modal">
     <div class="modal-content center">
         <h4>Comentarios sobre el alumno.</h4>
         <span>El siguiente comentario es para dar seguimiento al alumno y será usado para estadísticas.</span>
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('comentario') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="alumno_taller_id" id="alumno_taller_id" value="">
             <div class="row">
@@ -67,5 +67,61 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modalConstancia" class="modal">
+    <div class="modal-content">
+        <h4 class="center">Constancia</h4>
+        <form action="{{ route('constancia-alumno') }}" method="POST">
+            @csrf
+            <div class="col pt-3 center">
+                Estas a punto de conceder una constancia al alumno:
+            </div>
+            <div class="col center">
+                <strong>
+                    <h5 class="light" id="taller"></h5>
+                </strong>
+                <h5>📄</h5>
+            </div>
+            <div class="col center">
+                <input type="text" name="alumno_tallers_id" id="alumno_tallers_id" value="" style="display: none;">
+            </div>
+            <div class="row pt-5">
+                <div class="col s12 m6 center">
+                    <a href="#!" class="modal-close waves-effect waves-light btn red">Cancelar</a>
+                </div>
+                <div class="col s12 m6 center">
+                    <button type="submit" class="waves-effect waves-light btn green darken-3">Conceder</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modalAlumno" class="modal modal-fixed-footer bottom-sheet">
+    <div class="modal-content">
+        <h4 id="nombre_alumno">Alumno</h4>
+        <p>Todos los comentarios acerca del alumno: </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Comentarios</th>
+                </tr>
+            </thead>
+
+            <tbody id="comentariosTable">
+                <tr>
+                    <td>Sin Comentarios</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        <a href="#!" class="waves-effect waves-green btn green dark " onclick="modalComentario()">Nuevo Comentario</a>
     </div>
 </div>

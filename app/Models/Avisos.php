@@ -13,11 +13,11 @@ class Avisos extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function taller()
     {
-        return $this->belongsTo(Talleres::class, 'taller_id');
+        return $this->belongsTo(Talleres::class, 'id');
     }
 }

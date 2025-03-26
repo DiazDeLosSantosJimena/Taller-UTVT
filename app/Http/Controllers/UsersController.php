@@ -8,6 +8,7 @@ use App\Models\Eventos;
 use App\Models\Roles;
 use App\Models\Talleres;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,7 @@ class UsersController extends Controller
 
     public function viewAlumno()
     {
-        $talleres = Talleres::select('talleres.id', 'nombre_taller', 'tipo', 'alumno_tallers.constancia')
+        $talleres = Talleres::select('talleres.id', 'nombre_taller', 'tipo', 'alumno_tallers.constancia', 'alumno_tallers.id as alumno_taller_id')
             ->join('alumno_tallers', 'alumno_tallers.taller_id', 'talleres.id')
             ->where('alumno_tallers.user_id', '=', Auth()->user()->id)
             ->where('alumno_tallers.estatus', '=', 'activo')
@@ -40,6 +41,7 @@ class UsersController extends Controller
             ->leftJoin('periodos as p', 'a.periodo_id', '=', 'p.id')
             ->select(
                 'at.id as alumno_taller_id',
+                'at.taller_id',
                 'at.user_id',
                 't.nombre_taller',
                 'at.constancia',
@@ -62,9 +64,7 @@ class UsersController extends Controller
             )
             ->get();
 
-        $eventos = Eventos::all();
-
-        return view('alumno.index', compact('talleres', 'periodos', 'eventos'));
+        return view('alumno.index', compact('talleres', 'periodos'));
     }
 
     public function show()
@@ -281,5 +281,18 @@ class UsersController extends Controller
         Excel::import(new UsersImport, $request->file('file'));
 
         return redirect()->back()->with('success', 'Datos importados correctamente.');
+    }
+
+    public function destroy(User $user){
+        try {
+            $user->delete();
+            return redirect()->route('users.show')->with('success', 'Usuario eliminao exitosamente');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1451) {
+                return redirect()->route('users.show')->with('error', 'Error al eliminar el usuario. El usuario tiene registros asociados');
+            }
+            return redirect()->route('users.show')->with('error', 'Error al eliminar al usuario: '.$e->getMessage());
+        }
     }
 }

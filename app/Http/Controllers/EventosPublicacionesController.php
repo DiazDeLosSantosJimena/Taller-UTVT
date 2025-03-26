@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avisos;
 use App\Models\Publicaciones;
+use App\Models\Talleres;
 use Illuminate\Http\Request;
 
 class EventosPublicacionesController extends Controller
@@ -12,8 +14,13 @@ class EventosPublicacionesController extends Controller
      */
     public function index()
     {
-        $publish = Publicaciones::all();
-        return view('admin.publicaciones.index', compact('publish'));
+        $publish = Avisos::select('avisos.id', 'avisos.taller_id','titulo', 'avisos.descripcion', 'avisos.imagen','avisos.created_at', 'users.name as nombre', 'users.app', 'users.apm', 'talleres.nombre_taller as taller')
+        ->join('users', 'users.id', 'avisos.user_id')
+        ->join('talleres', 'talleres.id', 'avisos.taller_id')
+        ->get();
+
+        $talleres = Talleres::all();
+        return view('admin.publicaciones.index', compact('publish', 'talleres'));
     }
 
     /**
@@ -30,26 +37,33 @@ class EventosPublicacionesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+        // Validación
         $request->validate([
             'titulo' => 'required|string|max:255',
             'descripcion' => 'required|string',
-            'tipo' => 'required|string|in:anuncio,evento,noticia',
-            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'taller' => 'required',
         ]);
-
-        //Imagen 
-        $rutaImagen = null;
-        if ($request->hasFile('imagen')) {
-            $rutaImagen = $request->file('imagen')->store('publicaciones', 'public');
+    
+        // Guardar imagen si existe
+        if ($request->file('imagen')  !=  '') {
+            $file = $request->file('imagen');
+            $foto1 = $file->getClientOriginalName();
+            $dates = date('YmdHis');
+            $foto2 = $dates . $foto1;
+            \Storage::disk('public')->put($foto2, \File::get($file));
+        } else {
+            $foto2 = null;
         }
-
-        
-        $publicacion = Publicaciones::create([
-            'user_id' => Auth::id(),
+    
+        // Crear el aviso
+        Avisos::create([
+            'user_id' => Auth()->user()->id,
+            'taller_id' => $request->taller,
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
-            'tipo' => $request->tipo,
-            'imagen' => $rutaImagen
+            'imagen' => $foto2,
         ]);
 
         return redirect()->route('publicaciones.index')->with('success', 'Publicación creada exitosamente.');

@@ -51,7 +51,7 @@ class AvisosController extends Controller
             $foto1 = $file->getClientOriginalName();
             $dates = date('YmdHis');
             $foto2 = $dates . $foto1;
-            \Storage::disk('local')->put($foto2, \File::get($file));
+            \Storage::disk('public')->put($foto2, \File::get($file));
         } else {
             $foto2 = null;
         }
@@ -89,7 +89,33 @@ class AvisosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validación
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        // Guardar imagen si existe
+        if ($request->file('imagen')  !=  '') {
+            $file = $request->file('imagen');
+            $foto1 = $file->getClientOriginalName();
+            $dates = date('YmdHis');
+            $foto2 = $dates . $foto1;
+            \Storage::disk('public')->put($foto2, \File::get($file));
+        } else {
+            $foto2 = null;
+        }
+    
+        $avisos = Avisos::find($id);
+
+        // Crear el aviso
+        $avisos->titulo = $request->titulo;
+        $avisos->descripcion = $request->descripcion;
+        $avisos->imagen = $foto2;
+        $avisos->save();
+
+        return redirect()->route('publicaciones.index')->with('success', 'Publicación actualizada exitosamente.');
     }
 
     /**
@@ -97,6 +123,8 @@ class AvisosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $aviso = Avisos::find($id);
+        $aviso->delete();
+        return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada exitosamente.');
     }
 }

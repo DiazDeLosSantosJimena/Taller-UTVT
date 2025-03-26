@@ -51,25 +51,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime'
     ];
 
-    public function setPasswordAttribute($value){
+    public function setPasswordAttribute($value)
+    {
         $this->attributes['password'] = bcrypt($value);
     }
-    
-public function Roles() {
-    return $this->belongsTo(Roles::class,'rol_id');
-}
 
-public function Publicaciones() {
-    return $this->hasOne(Publicaciones::class,'user_id','id');
-}
+    public function Roles()
+    {
+        return $this->belongsTo(Roles::class, 'rol_id');
+    }
 
-public function AlumnoTaller() {
-    return $this->hasOne(AlumnoTaller::class,'user_id','id');
+    public function Avisos()
+    {
+        return $this->hasOne(Avisos::class, 'user_id');
+    }
 
-}
+    public function AlumnoTaller()
+    {
+        return $this->hasOne(AlumnoTaller::class, 'user_id', 'id');
+    }
 
-public function DocenteTaller() {
-    return $this->hasOne(DocenteTaller::class,'user_id','id');
-
-}
+    public function DocenteTaller()
+    {
+        return $this->hasOne(DocenteTaller::class, 'user_id', 'id');
+    }
 }

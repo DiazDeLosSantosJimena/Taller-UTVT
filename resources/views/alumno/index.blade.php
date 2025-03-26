@@ -25,11 +25,11 @@ $session_taller = session('taller')
     <div class="col">
         <div class="card center">
             <div class="card-details">
-                <p class="text-title">{{ $taller->nombre_taller }}<br>🏀</p>
+                <p class="text-title">{{ $taller->nombre_taller }}<br></p>
                 <p class="text-body">{{ $taller->tipo }}</p>
             </div>
-            @if($taller->constancia != 0)
-            <a href="{{ route('alumnos-taller', ['id' => $taller->id ]) }}" class="card-button">Constancia</a>
+            @if($taller->constancia)
+            <a href="{{ route('constancia', ['taller' => $taller->alumno_taller_id ]) }}" class="card-button">Constancia</a>
             @endif
         </div>
     </div>
@@ -72,7 +72,7 @@ $session_taller = session('taller')
                         @if($periodo->constancia === 0)
                         <p class="red-text">Constancia no concedida.</p>
                         @else
-                        <a class="waves-effect waves-light btn" href="/constancia">Obtener</a>
+                        <a class="waves-effect waves-light btn green" href="{{ route('constancia', ['taller' => $periodo->alumno_taller_id ]) }}"><i class="material-icons">file_download</i></a>
                         @endif
                     </td>
                 </tr>

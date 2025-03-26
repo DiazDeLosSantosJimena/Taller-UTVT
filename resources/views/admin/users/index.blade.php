@@ -20,9 +20,16 @@
 </div>
 
 @if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Exito!</strong> {{ session('success') }}.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+@if(session('error'))
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Exito!</strong> {{ session('success') }}.
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>Ups!</strong> {{ session('error') }}.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 
@@ -112,9 +119,9 @@
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#deletemodal{{ $user->id }}">
-                                Borrar
+                            <!-- Button delete modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $user->id }}">
+                                Eliminar
                             </button>
                         </td>
                     </tr>
