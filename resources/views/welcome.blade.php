@@ -2,16 +2,18 @@
 @section('css')
 <style>
     .nav-background {
-        background-image: url('{{ asset('img/patrones-talleres.png') }}');
+        background-image: url('{{ asset('img/FondoTalleres.png') }}');
+        background-size: cover; 
+        background-position: top;
+        background-repeat: no-repeat;
     }
 </style>
 @endsection
 @section('tituloInicio')
 <div class="section no-pad-bot nav-background" id="index-banner">
-    <div class="container">
-        <br><br>
+    <div class="container" style="padding-top: 150px; padding-bottom: 150px;">
         <div class="row center white-text">
-            <h1>TALLERES</h1>
+            <h1 class="covered-by-your-grace-regular">TALLERES</h1>
             <h4 class="light">DEPORTIVOS Y CULTURALES</h4>
         </div>
 
@@ -30,13 +32,19 @@
 @section('content')
 <div class="section">
     <div class="row" style="padding-top: 0.75rem;">
-        <div class="col s12 m6">
-            <h3>¡Únete a nuestros talleres culturales y deportivos! <br>
+        <div class="col s12 m12">
+            <h3 class="center">¡Únete a nuestros talleres culturales y deportivos! <br>
                 🎭⚽🎨🏀🏐</h3>
+        </div>
+        <div class="col s12 m12 center">
             <p>
                 <br>
                 Descubre tu pasión y desarrolla nuevas habilidades en nuestros talleres culturales y deportivos. Ya sea que te guste el arte, la música, el teatro o el deporte, tenemos una opción para ti.
                 <br>
+            </p>
+        </div>
+        <div class="col s12 m6 center">
+            <p>
                 <br>
                 📌 Talleres culturales: <br> <br>
                 🎨 Artes visuales <br>
@@ -44,6 +52,10 @@
                 🎶 Rondalla <br>
                 ✍️ Ortografía y redacción <br>
                 <br>
+            </p>
+        </div>
+        <div class="col s12 m6 center">
+            <p>
                 <br>
                 📌 Talleres deportivos: <br><br>
                 🏐 Voleibol <br>
@@ -52,12 +64,14 @@
                 🏈 Tocho bandera <br>
                 💃 Danza <br>
                 <br>
+            </p>
+        </div>
+        <div class="col s12 m12 center">
+            <p>
+                <br>
                 No importa tu nivel de experiencia, ¡solo necesitas ganas de aprender y divertirte! Inscríbete y forma parte de una comunidad llena de talento y energía. <br>
                 ¡No te quedes fuera! 🎉
             </p>
-        </div>
-        <div class="col s12 m6">
-            <img class="materialboxed" width="450" src="{{ asset('img/TalleresUTVT.jpg') }}">
         </div>
     </div>
 

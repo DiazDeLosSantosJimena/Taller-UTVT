@@ -8,6 +8,9 @@
 
     <link rel="shortcut icon" href="{{ asset('img/cuervo.svg') }}" type="image/svg+xml">
     <!-- CSS  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="{{ asset('css/plataforma/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection" />
@@ -16,7 +19,7 @@
 </head>
 
 <body>
-    <nav class="green darken-3" role="navigation">
+    <nav class="{{ $clase ?? 'green darken-3' }}" role="navigation">
         <div class="nav-wrapper container"><a id="logo-utvt" href="/" class="brand-logo"><img height="60" src="{{ asset('img/cuervo.svg') }}" alt="UTVT"></a>
             <!-- Navbar PC -->
             <ul class="right hide-on-med-and-down">
@@ -76,7 +79,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                <!-- Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a> -->
+                Todos los derechos reservados - <a class="white-text text-lighten-3" href="https://utvt.edomex.gob.mx/">Talleres UTVT</a>
             </div>
         </div>
     </footer>

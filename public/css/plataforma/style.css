@@ -13,6 +13,21 @@
 	font-size: inherit;
 }
 
+.covered-by-your-grace-regular {
+  font-family: "Covered By Your Grace";
+  font-weight: 400;
+  font-size: 96px;
+  font-style: normal;
+}
+
+.transparent {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 /* Estilos para mejorar las tarjetas */
 .card-image {
   display: flex;

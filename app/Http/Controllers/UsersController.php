@@ -24,7 +24,10 @@ class UsersController extends Controller
             ->where('talleres.estatus', '=', 'activo')
             ->get();
         $eventos = Eventos::all();
-        return view('welcome', compact('talleres', 'eventos'));
+
+        $clase = 'transparent';
+
+        return view('welcome', compact('talleres', 'eventos', 'clase'));
     }
 
     public function viewAlumno()
