@@ -144,7 +144,7 @@
                 <h5 class="light">{{ $taller->descripcion }}</h5>
                 <div class="center" style="padding-top: 10px;">
                     @auth
-                    <a class="waves-effect waves-light btn-small green darken-3 modal-trigger" href="#modalInscripcion" onclick="infoModal('{{ $taller->nombre_taller }}', {{ $taller->id }})">Inscribirse!</a>
+                    <a class="waves-effect waves-light btn-small green darken-3" onclick="infoModal('{{ $taller->nombre_taller }}', {{ $taller->id }})">Inscribirse!</a>
                     @endauth
                     @guest
                     <a class="waves-effect waves-light btn-small green darken-3 modal-trigger" href="/login">Inscribirse!</a>
@@ -167,8 +167,10 @@
                 Estas a punto de inscribirte al taller:
             </div>
             <div class="col center">
-                <strong><h5 class="light" id="taller"></h5></strong>
-                <h5>💪</h5>
+                <strong>
+                    <h5 class="light" id="taller_nombre"></h5>
+                </strong>
+                <h5 id="icono"></h5>
             </div>
             <div class="col center">
                 <input type="text" name="taller_id" id="taller_id" value="" style="display: none;">
@@ -186,15 +188,37 @@
 </div>
 
 <script>
-function infoModal(nombre, taller_id) {
-    const titulo = document.querySelector('#taller')
-    const inputTaller = document.querySelector('#taller_id')
+    function infoModal(nombre, taller_id) {
 
-    titulo.textContent = nombre
-    inputTaller.value = taller_id
+        const modalInscripcion = document.querySelector('#modalInscripcion')
+        const titulo = modalInscripcion.querySelector('#taller_nombre')
+        const icono = modalInscripcion.querySelector('#icono')
+        const inputTaller = document.querySelector('#taller_id')
 
-    // console.log(inputTaller.value);
-}
+        const tallerIcon = {
+            Futbol: '⚽',
+            Basquetbol: '🏀',
+            Voleibol: '🏐',
+            Tocho: '🏈',
+            Danza: '💃',
+            Rondalla: '🎶',
+            Teatro: '🎭',
+            Ortografía: '✍️',
+            Artes: '🎨'
+        }
+
+        console.log(nombre)
+
+        icono.textContent = tallerIcon[ nombre.split(" ")[0] ]
+
+        titulo.textContent = nombre
+        inputTaller.value = taller_id
+
+        const modal = M.Modal.init(modalInscripcion)
+        modal.open()
+
+        // console.log(inputTaller.value);
+    }
 </script>
 @endauth
 
