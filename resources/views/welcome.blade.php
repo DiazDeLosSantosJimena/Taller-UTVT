@@ -2,7 +2,7 @@
 @section('css')
 <style>
     .nav-background {
-        background-image: url('{{ asset('img/FondoTalleres.png') }}');
+        background-image: url('{{ asset('img/FondoTalleres.webp') }}');
         background-size: cover; 
         background-position: top;
         background-repeat: no-repeat;

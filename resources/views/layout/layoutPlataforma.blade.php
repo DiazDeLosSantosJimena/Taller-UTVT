@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>UTVT - Talleres Deportivos y Culturales</title>
 
+    <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
     <link rel="shortcut icon" href="{{ asset('img/cuervo.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('img/cuervo.svg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('img/cuervo.svg') }}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- CSS  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,8 +91,9 @@
 
 
     <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="{{ asset('js/plataforma/materialize.js') }}"></script>
+    <script src="{{ asset('js/plataforma/app.js') }}"></script>
+    <script src="{{ asset('js/plataforma/jquery-2.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/plataforma/materialize.min.js') }}"></script>
     <script src="{{ asset('js/plataforma/init.js') }}"></script>
     @yield('js')
 </body>
