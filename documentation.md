@@ -1,5 +1,5 @@
 # Documentación 📄
-<h2 align="center"> **Proyecto: Sistema de Talleres Culturales y Deportivos UTVT** </h2>
+<h2 align="center"> <strong> Proyecto: Sistema de Talleres Culturales y Deportivos UTVT </strong> </h2>
 
 <p>En está sección aclararemos algunas secciones que no se pudieron colocar dentro del código. Por lo que si no lo encuentras en está parte de la documentación, revisa el código. 😉</p>
 
