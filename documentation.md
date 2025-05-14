@@ -1,5 +1,5 @@
 # Documentación 📄
-<h2 align="center"> <strong>Proyecto: Sistema de Talleres Culturales y Deportivos UTVT</strong> </h2>
+<h2 align="center"> **Proyecto: Sistema de Talleres Culturales y Deportivos UTVT** </h2>
 
 <p>En está sección aclararemos algunas secciones que no se pudieron colocar dentro del código. Por lo que si no lo encuentras en está parte de la documentación, revisa el código. 😉</p>
 
@@ -11,21 +11,21 @@
 
 ## Inicialización de Proyecto
 (De forma local)
-- <strong>Clonar el repositorio:</strong> https://github.com/DiazDeLosSantosJimena/Taller-UTVT
-- <strong>Dependencias:</strong>
+- **Clonar el repositorio:** https://github.com/DiazDeLosSantosJimena/Taller-UTVT
+- **Dependencias:**
 ```
 composer install
 ```
-- <strong>Variables de entorno:</strong>
-Aegurate de tener el archivo ".env.example" y crear el archivo .env
+- **Variables de entorno:**
+Asegurate de tener el archivo ".env.example" y crear el archivo .env
 ```
 cp .env.example .env
 ```
-- <strong>Generar la clave de aplicación:</strong>
+- **Generar la clave de aplicación:**
 ```
 php artisan key:generate
 ```
-- <strong>Generar Link para Visualizar Archivos:</strong>
+- **Generar Link para Visualizar Archivos:**
 ```
 php artisan storage:link
 ```
