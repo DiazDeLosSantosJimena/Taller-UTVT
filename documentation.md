@@ -47,7 +47,7 @@ php artisan storage:link
 <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a>
 </p>
 
-## 📈 Migraciones
+## Migraciones 📈
 El proyecto por defecto trae migraciones con registros para que puedas practicar o ver en funcionamiento de la aplicación (no representan registros reales).
 ```
 php artisan migration --seed
