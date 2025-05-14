@@ -1,7 +1,7 @@
 # Documentación 📄
 <h2 align="center"> <strong> Proyecto: Sistema de Talleres Culturales y Deportivos UTVT </strong> </h2>
 
-<p>En está sección aclararemos algunas secciones que no se pudieron colocar dentro del código. Por lo que si no lo encuentras en está parte de la documentación, revisa el código. 😉</p>
+<p>En los siguientes apartados aclararemos algunas secciones que no se pudieron colocar dentro del código. Por lo que si tienes alguna duda acerca de la aplicación y no lo encuentras en está parte de la documentación, revisa el código. 😉</p>
 
 ### Tabla de contenidos
 - [Inicialización de Proyecto](#inicialización-de-proyecto)
@@ -47,7 +47,7 @@ php artisan storage:link
 <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a>
 </p>
 
-## Migraciones 📈
+## Migraciones
 El proyecto por defecto trae migraciones con registros para que puedas practicar o ver en funcionamiento de la aplicación (no representan registros reales).
 ```
 php artisan migration --seed
