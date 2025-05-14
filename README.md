@@ -1,6 +1,6 @@
 <h1 align="center">Sistema de Talleres Culturales y Deportivos UTVT</h1>
 
-<p align="center"><a href="https://utvt.edomex.gob.mx/" target="_blank"><img src="./public/img/cuervo.svg" height="200" alt="Cuervo Logo"></a></p>
+<p align="center"><a href="https://utvt.edomex.gob.mx/" target="_blank"><img src="./public/img/src/Icon-512.png" height="200" alt="Cuervo Logo"></a></p>
 
 ## 🚩Descripción
 <p>Este proyecto web tiene como objetivo gestionar los talleres de la universidad mediante un sistema que permite la inscripción de alumnos y la administración de asistencia por parte de los docentes. A través de esta plataforma, los estudiantes pueden inscribirse a los talleres de su interés, mientras que los profesores pueden visualizar la lista de inscritos y registrar su asistencia. Al final del cuatrimestre, si los alumnos cumplen con los requisitos de asistencia, podrán obtener su constancia de participación. Además, el sistema ofrece a los profesores la capacidad de publicar anuncios y eventos específicos para su taller, facilitando la comunicación con los estudiantes. De esta manera, la plataforma mejora la organización y accesibilidad de los talleres universitarios, proporcionando un entorno digital eficiente tanto para alumnos como para docentes.</p>
